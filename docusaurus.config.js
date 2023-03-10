@@ -188,8 +188,8 @@ const config = {
         docsPluginId: "classic",
         config: {
           "platform-api": {
-            // specPath: "openapi/mx_platform_api.yaml",
-            specPath: "https://api.redocly.com/registry/bundle/mx-test/MX%20Platform/v1/openapi.yaml?branch=main",
+            specPath: "openapi/mx_platform_api.yaml",
+            // specPath: "https://api.redocly.com/registry/bundle/mx-test/MX%20Platform/v1/openapi.yaml?branch=main",
             outputDir: "docs/platform-api",
             // downloadUrl:
             //   "https://raw.githubusercontent.com/PaloAltoNetworks/docusaurus-template-openapi-docs/main/examples/petstore.yaml",
