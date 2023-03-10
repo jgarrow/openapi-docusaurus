@@ -11,7 +11,7 @@ const config = {
   // tagline: "Dinosaurs are cool",
   url: "https://yip-yip.surge.sh",
   baseUrl: "/",
-  onBrokenLinks: "throw",
+  onBrokenLinks: "warn", // TODO: change to throw for production
   onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",
 
