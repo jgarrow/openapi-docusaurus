@@ -1,5 +1,118 @@
 ---
 sidebar_position: 2
+sidebar_label: How it works
 ---
 
-# How it works
+## Aggregation Methods
+
+Aggregation is an important feature of the MX Platform API. Aggregating data enables people to see when, where, and how much they are spending. This helps you build solutions that can improve the financial lives of your organization's customers.
+
+There are multiple ways to achieve aggregation with the MX Platform API depending on your integration. You can aggregate data in one of the following ways:
+
+- Using the MXconnect widget: A widget that can be embedded in your application to aggregate user's account data by prompting end users to connect to their financial institutions using their credentials. This is the preferred method of aggregation. MXconnect currently only supports standard aggregation and account verification.
+- Using API endpoints: Requires you to make multiple calls to several endpoints to create unique identifiers using an end user's personal information that can be used to retrieve account information.
+
+---
+
+## Background Aggregation
+
+MX aggregates each member every 24 hours automatically. This process is called background aggregation. It ensures that end users' data is always up to date. This is beneficial because, if a background aggregation is successful (i.e., the successfully_aggregated_at field indicates a time within the last 24 hours), you can choose to skip foreground aggregation and jump right to reading account and transaction data, which can help you load things faster in your product.
+
+This background aggregation can be disabled by default for all members. Please reach out to MX to have this setting configured.
+
+Background aggregation can be disabled or enabled for individual members by setting the background_aggregation_is_disabled field when creating or updating a member.
+
+Background aggregation is also disabled for members created when using the Connect Widget in verification mode. You can override this behavior by setting the disable_background_agg widget option to false. Note that this only affects newly created members.
+
+---
+
+## Foreground Aggregation
+
+If an end user is present, you can choose to manually run a foreground aggregation. End users must be present during foreground aggregations because they may run into MFA, credential update requests, terms and conditions agreements, or other situations requiring end-user input. Just keep in mind that you cannot run a new aggregation within three hours of a successful aggregation, whether foreground or background. Thus, attention must be paid to the `aggregated_at` and `successfully_aggregated_at` member fields while you're developing your product with the Platform API.
+
+:::caution
+
+Both foreground and background aggregation may be prevented by disabling a `user`. A `user` must be re-enabled before any aggregation can be attempted. We may suspend background aggregation on a particular `member` in some circumstances, such as when several consecutive aggregation attempts fail. However, you can always attempt a foreground aggregation on a suspended `member`.
+
+:::
+
+---
+
+## Automatic Aggregation
+
+**Automatic aggregation** is a bit different. Every time a new member is successfully created or an existing member is successfully updated, an aggregation process will start automatically, without having to manually call the *aggregate member* endpoint. You will, however, need to follow up on the rest of the aggregation process, like looking for changes in the connection status, answering MFA, etc.
+
+If your workflow requires that there not be any automatic aggregation, you can easily prevent it by including the `skip_aggregation` body parameter and setting it to `true` in either a [create member] or *update member* request.
+
+---
+
+## Important Fields and States
+
+There are multiple fields on each `member` that help you determine what state aggregation is in and how to resolve that state into a successful aggregation — as well as when resolution is not possible. These all need to be weighed together to make an aggregation successful.
+
+### `connection_status`
+
+The `connection_status` field indicates the current state of an aggregation. For instance:
+
+- `CREATED` means the member has just been created.
+- `CHALLENGED` means the aggregation has run into MFA.
+- `FAILED` means the aggregation was unsuccessful.
+
+The connection statuses `CREATED`, `UPDATED`, `DELAYED`, and `RESUMED` represent transient states for different points in the aggregation process and generally do not require a specific action or end-user input. They may, however, require you to keep making read requests on the member until an actionable status or an end state shows up.
+
+The connection statuses `PREVENTED`, `DENIED`, `IMPEDED`, `IMPAIRED`, `REJECTED`, `EXPIRED`, `LOCKED`, `IMPORTED`, `DISABLED`, `DISCONTINUED`, and `CLOSED` represent end states that require a new aggregation, and possibly end-user input, for future success.
+
+For exact definitions and next steps for each of the 21 connection statuses visit the [API Reference](/platform-api).
+
+### `is_being_aggregated`
+
+The `is_being_aggregated` indicates whether an aggregation process is currently taking place on the MX platform.
+
+The `connection_status` and `is_being_aggregated` fields should be used in conjunction with several other member fields to determine future actions. These include `aggregated_at`, `successfully_aggregated_at`, and `is_authenticated`.
+
+For example, when the `connection_status` is `CONNECTED` and the `is_being_aggregated` field is `false`, this means the latest aggregation attempt has finished and data for accounts and transactions can be read. You can use the field successfully_aggregated_at to determine when the last successful aggregation occurred.
+
+Member fields to pay attention to:
+
+| Field Name                   | Data Type | Description                                                                                                                                                    |
+|------------------------------|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `aggregated_at`              | String    | The date and time at which the last aggregation for the member was initiated, represented in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format with timestamp (e.g., 2015-04-13T12:01:23-06:00). |
+| `connection_status`          | Boolean   | This field indicates the state of a member's aggregation, provided as a string. See member connection statuses for more information on possible values.        |
+| `is_being_aggregated`        | String    | This field will be true if the member is being aggregated at the time of the request. Otherwise, this field will be false.                                     |
+| `successfully_aggregated_at` | String    | The date and time the account was last successfully aggregated, represented in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format with timestamp (e.g., 2015-04-13T12:01:23-06:00).               |
+
+---
+
+## Connection Status
+
+In general, aggregation can be attempted for a member with the following connection statuses:
+
+- CREATED
+- CONNECTED
+- DEGRADED
+- DISCONNECTED
+- EXPIRED
+- FAILED
+- IMPEDED
+- RECONNECTED
+- UPDATED
+
+In general, you must update credentials before aggregating a member with the following connection statuses:
+
+- PREVENTED
+- DENIED
+- IMPAIRED
+- IMPORTED
+
+The following connection statuses represent a transitory state in an ongoing aggregation process:
+
+- CHALLENGED
+- DELAYED
+- REJECTED
+- RESUMED
+
+You should not attempt aggregation on a member with the following connection statuses:
+
+- CLOSED
+- DISABLED
+- DISCONTINUED

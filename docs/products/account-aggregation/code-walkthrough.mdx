@@ -1,5 +1,79 @@
 ---
 sidebar_position: 3
+sidebar_label: Code walkthrough
 ---
 
-# Code walkthrough
+# Overview
+
+You can aggregate data using the MXconnect widget. It's important to note that there are many configuration options available, all of which can be viewed in our [API Reference](/platform-api/mx-platform-api).
+
+Get instructions about downloading our demo app to see aggregation with MXconnect in action.
+
+Visit our Connect Widget Generator to easily build JSON code to configure your widget.
+
+To aggregate using MXconnect, follow these instructions:
+
+---
+
+## 1. Create a user
+
+The first step is to create a user. A user represents your end user in the MX Platform. Make a POST request to the [create user endpoint](/platform-api/create-user), as shown below.
+
+We recommend that you include a unique `id` of your choice with the request. You may also include `metadata`, such as the date the `user` was created or the end user's name. Don't include any sensitive information here, such as credentials.
+
+:::info
+
+None of these parameters are required, but the `user` object cannot be empty. We recommend that partners always set the `id` parameter when creating a user.
+
+:::
+
+In the response, the API gives each new `user` an MX-defined guid (or `user_guid` when appearing outside the `user` object). Between your `id` and the `guid`, you can map between your system and ours. You'll need the user `guid` for nearly every request on the MX API, at least when using basic authorization.
+
+```bash
+curl -i -X POST 'https://int-api.mx.com/users' \
+-u 'client_id:api_key' \
+-H 'Accept: application/vnd.mx.api.v1+json' \
+-H 'Content-Type: application/json' \
+-d '{
+      "user": {
+        "id": "partner-2345",
+        "is_disabled": false,
+        "email": "totally.fake.email@notreal.com",
+        "metadata": "Yada yada yada"
+      }
+    }'
+```
+---
+
+## 2. Request an MXconnect URL
+
+Make a POST request to the `widget_urls` endpoint using the guid.
+
+:::info
+
+Ensure that the mode is set to aggregation.
+
+:::
+
+```bash title=Endpoint:
+POST /users/{user_guid}/widget_urls
+```
+
+```bash
+curl -i -X POST 'https://int-api.mx.com/users/USR-11141024-90b3-1bce-cac9-c06ced52ab4c/widget_urls' \
+-u '{client_id}:{api_key}' \
+-H 'Accept: application/vnd.mx.api.v1+json' \
+-H 'Content-Type: application/json' \
+-d '{
+      "widget_url": {
+        "widget_type": "connect_widget",
+        "color_scheme": "dark"
+      }
+    }'
+```
+
+---
+
+## 3. Embed MXconnect
+
+There are many considerations and possible paths for embedding MXconnect depending on your integration type and use case. So we've got a separate guide on embedding MXconnect which covers all the possibilities. Check out the details there.
