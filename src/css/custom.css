@@ -1,0 +1,121 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* You can override the default Infima variables here. */
+:root {
+  /* --ifm-color-primary: #2e8555;
+  --ifm-color-primary-dark: #29784c;
+  --ifm-color-primary-darker: #277148;
+  --ifm-color-primary-darkest: #205d3b;
+  --ifm-color-primary-light: #33925d;
+  --ifm-color-primary-lighter: #359962;
+  --ifm-color-primary-lightest: #3cad6e; */
+  --ifm-color-primary: #2d64ef;
+  --ifm-color-primary-dark: #1351ed;
+  --ifm-color-primary-darker: #114ce0;
+  --ifm-color-primary-darkest: #0e3eb9;
+  --ifm-color-primary-light: #4777f1;
+  --ifm-color-primary-lighter: #5581f2;
+  --ifm-color-primary-lightest: #7c9ef5;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --ifm-navbar-height: 60px;
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  /* --ifm-color-primary: #25c2a0;
+  --ifm-color-primary-dark: #21af90;
+  --ifm-color-primary-darker: #1fa588;
+  --ifm-color-primary-darkest: #1a8870;
+  --ifm-color-primary-light: #29d5b0;
+  --ifm-color-primary-lighter: #32d8b4;
+  --ifm-color-primary-lightest: #4fddbf; */
+  --ifm-color-primary: #b0cefd;
+  --ifm-color-primary-dark: #86b4fc;
+  --ifm-color-primary-darker: #71a7fb;
+  --ifm-color-primary-darkest: #3280fa;
+  --ifm-color-primary-light: #c5dbfe;
+  --ifm-color-primary-lighter: #eff5ff;
+  --ifm-color-primary-lightest: #ffffff;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+/* Sidebar Method labels */
+.api-method>.menu__link {
+  align-items: center;
+  justify-content: start;
+}
+
+.api-method>.menu__link::before {
+  width: 50px;
+  height: 20px;
+  font-size: 12px;
+  line-height: 20px;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 0.25rem;
+  border: 1px solid;
+  margin-right: var(--ifm-spacing-horizontal);
+  text-align: center;
+  flex-shrink: 0;
+  border-color: transparent;
+  color: white;
+}
+
+.get>.menu__link::before {
+  content: "get";
+  background-color: var(--ifm-color-primary);
+}
+
+.put>.menu__link::before {
+  content: "put";
+  background-color: var(--openapi-code-blue);
+}
+
+.post>.menu__link::before {
+  content: "post";
+  background-color: var(--openapi-code-green);
+}
+
+.delete>.menu__link::before {
+  content: "del";
+  background-color: var(--openapi-code-red);
+}
+
+.patch>.menu__link::before {
+  content: "patch";
+  background-color: var(--openapi-code-orange);
+}
+
+.navbar__brand {
+  height: 44px;
+  width: auto;
+  margin-right: 2rem;
+}
+
+.navbar__logo {
+  height: 100%;
+  width: auto;
+}
+
+.navbar__item {
+  /* padding: var(--ifm-navbar-item-padding-vertical) 0; */
+  padding: 0;
+  margin: 0 1rem; 
+}
+
+.navbar__item:first-child {
+  margin-left: 0;
+}
+
+.navbar__item:last-child {
+  margin-right: 0;
+}

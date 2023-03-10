@@ -1,0 +1,34 @@
+---
+id: delete-member
+title: "Delete member"
+description: "Accessing this endpoint will permanently delete a member."
+sidebar_label: "Delete member"
+hide_title: true
+hide_table_of_contents: true
+api: {"description":"Accessing this endpoint will permanently delete a member.","operationId":"deleteMember","parameters":[{"description":"The unique id for a `member`.","example":"MBR-7c6f361b-e582-15b6-60c0-358f12466b4b","in":"path","name":"member_guid","required":true,"schema":{"type":"string"}},{"description":"The unique id for a `user`.","example":"USR-fa7537f3-48aa-a683-a02a-b18940482f54","in":"path","name":"user_guid","required":true,"schema":{"type":"string"}}],"responses":{"204":{"description":"No Content"}},"tags":["users"],"method":"delete","path":"/users/{user_guid}/members/{member_guid}","servers":[{"url":"https://api.mx.com"},{"url":"https://int-api.mx.com"}],"security":[{"basicAuth":[]}],"securitySchemes":{"basicAuth":{"scheme":"basic","type":"http"}},"info":{"contact":{"name":"MX Platform API","url":"https://www.mx.com/products/platform-api"},"description":"The MX Platform API is a powerful, fully-featured API designed to make aggregating and enhancing financial data easy and reliable. It can seamlessly connect your app or website to tens of thousands of financial institutions.","title":"MX Platform API","version":"0.1.0"},"postman":{"name":"Delete member","description":{"content":"Accessing this endpoint will permanently delete a member.","type":"text/plain"},"url":{"path":["users",":user_guid","members",":member_guid"],"host":["{{baseUrl}}"],"query":[],"variable":[{"disabled":false,"description":{"content":"(Required) The unique id for a `member`.","type":"text/plain"},"type":"any","value":"","key":"member_guid"},{"disabled":false,"description":{"content":"(Required) The unique id for a `user`.","type":"text/plain"},"type":"any","value":"","key":"user_guid"}]},"method":"DELETE"}}
+sidebar_class_name: "delete api-method"
+info_path: docs/platform-api/mx-platform-api
+custom_edit_url: null
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import TabItem from "@theme/TabItem";
+
+## Delete member
+
+
+
+Accessing this endpoint will permanently delete a member.
+
+<details style={{"marginBottom":"1rem"}} data-collapsed={false} open={true}><summary style={{}}><strong>Path Parameters</strong></summary><div><ul><ParamsItem className={"paramsItem"} param={{"description":"The unique id for a `member`.","example":"MBR-7c6f361b-e582-15b6-60c0-358f12466b4b","in":"path","name":"member_guid","required":true,"schema":{"type":"string"}}}></ParamsItem><ParamsItem className={"paramsItem"} param={{"description":"The unique id for a `user`.","example":"USR-fa7537f3-48aa-a683-a02a-b18940482f54","in":"path","name":"user_guid","required":true,"schema":{"type":"string"}}}></ParamsItem></ul></div></details><div><ApiTabs><TabItem label={"204"} value={"204"}><div>
+
+No Content
+
+</div><div></div></TabItem></ApiTabs></div>
+      

@@ -1,0 +1,40 @@
+---
+sidebar_position: 1
+sidebar_label: Account aggregation
+---
+
+import { UseCase } from "@site/src/components/UseCase"
+
+# Intended use
+
+Intended use/description of the product will be displayed here.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+## Use cases
+
+export function UseCaseSection({children}) {
+  return <div className="mt-6 mb-[60px] grid grid-cols-2 auto-rows-max gap-6">{children}</div>
+}
+
+<UseCaseSection>
+  <UseCase 
+    slug="/use-cases/gather-financial-data" 
+    title="Gather financial data"
+    Svg={require("@site/static/img/money-hand.svg").default}
+  >
+    Gather end user's tax statements or credit card rewards, such as miles or points, by connecting to their account with our Account Aggregation product. For additional transaction history, continue with our Extended Transaction History product.
+  </UseCase>
+  <UseCase 
+    slug="/use-cases/review-financial-data" 
+    title="Review financial data"
+    Svg={require("@site/static/img/magnifying-glass.svg").default}
+  >
+    With our Statements product, connect to an end user’s financial account to retrieve PDF financial statements to gather more information for decisioning.
+  </UseCase>
+</UseCaseSection>
+
+## Before you begin
+
+1. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+3. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+4. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
