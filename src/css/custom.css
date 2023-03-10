@@ -12,11 +12,11 @@
 :root {
   --ifm-color-primary: #2d64ef;
   --ifm-color-primary-dark: #1351ed;
-  --ifm-color-primary-darker: #114ce0;
-  --ifm-color-primary-darkest: #0e3eb9;
+  --ifm-color-primary-darker: #0b3191;
+  --ifm-color-primary-darkest: #061b4f;
   --ifm-color-primary-light: #4777f1;
-  --ifm-color-primary-lighter: #5581f2;
-  --ifm-color-primary-lightest: #7c9ef5;
+  --ifm-color-primary-lighter: #a4bcf8;
+  --ifm-color-primary-lightest: #e6ecfd;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --ifm-navbar-height: 60px;
@@ -32,6 +32,26 @@
   --ifm-color-primary-lighter: #9dc1fc;
   --ifm-color-primary-lightest: #d0e2fd;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+ol {
+  list-style-type: none; /* Remove the default marker */
+  counter-reset: my-counter; /* Set up a counter to number the list */
+  padding-left: 2em; /* Add some spacing between the left edge and the list items */
+}
+
+ol li::before {
+  content: counter(my-counter); /* Use the counter to number the list */
+  counter-increment: my-counter; /* Increment the counter for each list item */
+  display: inline-block; /* Make the bullet point a block element */
+  width: 1.5em; /* Set the width of the bullet point */
+  height: 1.5em; /* Set the height of the bullet point */
+  border-radius: 50%; /* Make the bullet point a circle */
+  background-color: var(--ifm-color-primary-lightest); /* Set the background color of the bullet point */
+  color: black; /* Set the color of the text in the bullet point */
+  text-align: center; /* Center the text in the bullet point */
+  margin-right: 0.5em; /* Add some spacing between the bullet point and the text */
+  line-height: 1.5em; /* Adjust line height to help center text */
 }
 
 /* Sidebar Method labels */
