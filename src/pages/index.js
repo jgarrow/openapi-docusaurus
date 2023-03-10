@@ -37,7 +37,7 @@ export default function Home() {
       description="Description will go into a meta tag in <head />">
       <HomepageHeader />
       <main className='w-full max-w-[1194px] mx-auto mt-6'>
-        <div className="grid grid-cols-3 gap-6 mt-14">
+        <div className="grid grid-cols-3 gap-6 mb-14">
           <Card 
             link="/use-cases"
             Svg={require('@site/static/img/examine-doc.svg').default}
