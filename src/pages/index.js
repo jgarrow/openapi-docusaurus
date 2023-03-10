@@ -20,7 +20,7 @@ function HomepageHeader() {
         <div className="block">
           <Link
             className="button button--lg bg-[var(--ifm-color-primary)] hover:bg-[var(--ifm-color-primary-dark)] text-white"
-            to="/intro">
+            to="/products">
             Get started
           </Link>
         </div>
