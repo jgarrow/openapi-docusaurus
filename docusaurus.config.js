@@ -42,6 +42,7 @@ const config = {
     ({
       docs: {
         sidebar: {
+          autoCollapseCategories: true,
           hideable: true
         }
       },
@@ -118,7 +119,7 @@ const config = {
             items: [
               {
                 label: "Tutorial",
-                to: "/intro"
+                to: "/"
               }
             ]
           },
@@ -142,10 +143,6 @@ const config = {
           {
             title: "More",
             items: [
-              {
-                label: "Blog",
-                to: "/blog"
-              },
               {
                 label: "GitHub",
                 href: "https://github.com/facebook/docusaurus"
