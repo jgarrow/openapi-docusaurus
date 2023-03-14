@@ -181,3 +181,21 @@ For example, the first level category has a padding of 12px, the second level ca
   border-right: 1px solid var(--ifm-toc-border-color);
 }
 
+.table-of-contents {
+  padding-left: 0;
+}
+
+.table-of-contents.table-of-contents__left-border {
+  border-left: none;
+}
+
+.table-of-contents li {
+  margin: 0;
+  padding: calc(var(--ifm-toc-padding-vertical) / 2) var(--ifm-toc-padding-horizontal);
+  padding-left: calc(var(--ifm-toc-padding-horizontal) * 2);
+  border-left: 1px solid var(--ifm-toc-border-color);
+}
+
+.table-of-contents li:has(.table-of-contents__link--active) {
+  border-left-color: var(--ifm-color-primary);
+}
