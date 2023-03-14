@@ -20,10 +20,14 @@
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --ifm-navbar-height: 60px;
+  --ifm-menu-color-background-active: #f8f9fb;
+  --ifm-color-emphasis-300: #E4E8EE;
+  --ifm-menu-link-padding-vertical: 1rem;
+  --ifm-menu-link-padding-horizontal: 1.25rem;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme='dark'] {
+[data-theme="dark"] {
   --ifm-color-primary: #69a1fa;
   --ifm-color-primary-dark: #478bf9;
   --ifm-color-primary-darker: #3581f8;
@@ -47,7 +51,9 @@ ol li::before {
   width: 1.5em; /* Set the width of the bullet point */
   height: 1.5em; /* Set the height of the bullet point */
   border-radius: 50%; /* Make the bullet point a circle */
-  background-color: var(--ifm-color-primary-lightest); /* Set the background color of the bullet point */
+  background-color: var(
+    --ifm-color-primary-lightest
+  ); /* Set the background color of the bullet point */
   color: black; /* Set the color of the text in the bullet point */
   text-align: center; /* Center the text in the bullet point */
   margin-right: 0.5em; /* Add some spacing between the bullet point and the text */
@@ -55,12 +61,12 @@ ol li::before {
 }
 
 /* Sidebar Method labels */
-.api-method>.menu__link {
+.api-method > .menu__link {
   align-items: center;
   justify-content: start;
 }
 
-.api-method>.menu__link::before {
+.api-method > .menu__link::before {
   width: 50px;
   height: 20px;
   font-size: 12px;
@@ -76,27 +82,27 @@ ol li::before {
   color: white;
 }
 
-.get>.menu__link::before {
+.get > .menu__link::before {
   content: "get";
   background-color: var(--ifm-color-primary);
 }
 
-.put>.menu__link::before {
+.put > .menu__link::before {
   content: "put";
   background-color: var(--openapi-code-blue);
 }
 
-.post>.menu__link::before {
+.post > .menu__link::before {
   content: "post";
   background-color: var(--openapi-code-green);
 }
 
-.delete>.menu__link::before {
+.delete > .menu__link::before {
   content: "del";
   background-color: var(--openapi-code-red);
 }
 
-.patch>.menu__link::before {
+.patch > .menu__link::before {
   content: "patch";
   background-color: var(--openapi-code-orange);
 }
@@ -115,7 +121,7 @@ ol li::before {
 .navbar__item {
   /* padding: var(--ifm-navbar-item-padding-vertical) 0; */
   padding: 0;
-  margin: 0 1rem; 
+  margin: 0 1rem;
 }
 
 .navbar__item:first-child {
@@ -125,3 +131,53 @@ ol li::before {
 .navbar__item:last-child {
   margin-right: 0;
 }
+
+.menu__list-item-collapsible, .menu__link, .menu__caret {
+  border-radius: 0;
+}
+
+.theme-doc-sidebar-item-category .theme-doc-sidebar-item-link {
+  border-left: 2px solid #D9D9D9;
+  margin-top: 0;
+}
+
+.theme-doc-sidebar-item-category .theme-doc-sidebar-item-link:has(.menu__link--active) {
+  border-left-color: var(--ifm-color-primary);
+}
+
+.theme-doc-sidebar-item-category-level-1 .menu__list,
+.theme-doc-sidebar-item-category-level-1 .menu__list .menu__list {
+  padding-left: 2rem;
+}
+
+/* Recursive selector that targets any nested .menu__list element within a .theme-doc-sidebar-item-category-level-{number} 
+
+For example, the first level category has a padding of 12px, the second level category has a padding of 32px, the third level category has a padding of 52px, etc.
+*/
+[class*="theme-doc-sidebar-item-category-level-"] > .menu__list .menu__list {
+  padding-left: calc(
+    (
+      parseInt(
+        /* Get the category level number from the class name */
+        attr(class), 
+        /* Extract the level number from the class name */
+        'theme-doc-sidebar-item-category-level-(\\d+)'
+      ) - 1
+      /* using CSS variables for the 20px and 12px doesn't seem to work */
+    ) * 20px + 12px
+  );
+} 
+
+.theme-doc-sidebar-container {
+  border-right: none;
+}
+
+.theme-doc-sidebar-nav-wrapper {
+  display: flex;
+  flex-direction: column;
+  max-height: 100vh;
+  height: 100%;
+  margin-top: 2rem;
+  border-right: 1px solid var(--ifm-toc-border-color);
+}
+
