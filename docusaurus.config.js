@@ -3,14 +3,13 @@
 
 const lightCodeTheme = require("prism-react-renderer/themes/github");
 const darkCodeTheme = require("prism-react-renderer/themes/dracula");
-// const { getNavbarItems } = require("./getNavbarItems");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "MX Docs",
   // tagline: "Dinosaurs are cool",
-  url: "https://yip-yip.surge.sh",
-  baseUrl: "/",
+  url: "https://press.sand.internal.mx",
+  baseUrl: "/v2",
   onBrokenLinks: "warn", // TODO: change to throw for production
   onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",
@@ -30,13 +29,7 @@ const config = {
           docLayoutComponent: "@theme/DocPage",
           docItemComponent: "@theme/ApiItem" // Derived from docusaurus-theme-openapi
         },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          // editUrl:
-          //   "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/"
-        },
+        blog: false,
         theme: {
           customCss: require.resolve("./src/css/custom.css")
         }
@@ -76,22 +69,22 @@ const config = {
                 to: "/products/account-aggregation",
                 label: "Account Aggregation"
               },
-              {
-                to: "/extended-transaction-history",
-                label: "Extended Transaction History"
-              },
-              {
-                to: "/instant-account-verification",
-                label: "Instant Account Verification"
-              },
-              {
-                to: "/account-owner-verification",
-                label: "Account Owner Verification"
-              },
-              {
-                to: "/microdeposits",
-                label: "Microdeposits"
-              },
+              // {
+              //   to: "/extended-transaction-history",
+              //   label: "Extended Transaction History"
+              // },
+              // {
+              //   to: "/instant-account-verification",
+              //   label: "Instant Account Verification"
+              // },
+              // {
+              //   to: "/account-owner-verification",
+              //   label: "Account Owner Verification"
+              // },
+              // {
+              //   to: "/microdeposits",
+              //   label: "Microdeposits"
+              // },
             ]
           },
           { to: "/use-cases", label: "Use cases", position: "left" },
@@ -100,16 +93,16 @@ const config = {
             position: "left",
             to: "/platform-api/mx-platform-api"
           },
-          {
-            label: "More APIs",
-            position: "left",
-            to: "/more-apis"
-          },
-          {
-            label: "Resources",
-            position: "left",
-            to: "/resources"
-          },
+          // {
+          //   label: "More APIs",
+          //   position: "left",
+          //   to: "/more-apis"
+          // },
+          // {
+          //   label: "Resources",
+          //   position: "left",
+          //   to: "/resources"
+          // },
           {
             href: "https://dashboard.mx.com",
             label: "Login",
@@ -188,6 +181,7 @@ const config = {
         docsPluginId: "classic",
         config: {
           "platform-api": {
+            label: "Platform API",
             specPath: "openapi/mx_platform_api.yaml",
             // specPath: "https://api.redocly.com/registry/bundle/mx-test/MX%20Platform/v1/openapi.yaml?branch=main",
             outputDir: "docs/platform-api",
@@ -195,7 +189,7 @@ const config = {
             //   "https://raw.githubusercontent.com/PaloAltoNetworks/docusaurus-template-openapi-docs/main/examples/petstore.yaml",
             sidebarOptions: {
               groupPathsBy: "tag",
-              categoryLinkSource: "tag"
+              categoryLinkSource: "tag",
             }
           }
         }
