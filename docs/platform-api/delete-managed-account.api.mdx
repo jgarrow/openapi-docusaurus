@@ -26,9 +26,35 @@ import TabItem from "@theme/TabItem";
 
 Use this endpoint to delete a partner-managed account according to its unique GUID. If successful, the API will respond with a status of `204 No Content`.
 
-<details style={{"marginBottom":"1rem"}} data-collapsed={false} open={true}><summary style={{}}><strong>Path Parameters</strong></summary><div><ul><ParamsItem className={"paramsItem"} param={{"description":"The unique id for an `account`.","example":"ACT-06d7f44b-caae-0f6e-1384-01f52e75dcb1","in":"path","name":"account_guid","required":true,"schema":{"type":"string"}}}></ParamsItem><ParamsItem className={"paramsItem"} param={{"description":"The unique id for a `member`.","example":"MBR-7c6f361b-e582-15b6-60c0-358f12466b4b","in":"path","name":"member_guid","required":true,"schema":{"type":"string"}}}></ParamsItem><ParamsItem className={"paramsItem"} param={{"description":"The unique id for a `user`.","example":"USR-fa7537f3-48aa-a683-a02a-b18940482f54","in":"path","name":"user_guid","required":true,"schema":{"type":"string"}}}></ParamsItem></ul></div></details><div><ApiTabs><TabItem label={"204"} value={"204"}><div>
+
+<details style={{"marginBottom":"1rem"}} data-collapsed={false} open={true}>
+<summary style={{}}>
+<strong>Path Parameters</strong>
+</summary>
+
+<div>
+<ul>
+<ParamsItem className={"paramsItem"} param={{"description":"The unique id for an `account`.","example":"ACT-06d7f44b-caae-0f6e-1384-01f52e75dcb1","in":"path","name":"account_guid","required":true,"schema":{"type":"string"}}}></ParamsItem>
+
+<ParamsItem className={"paramsItem"} param={{"description":"The unique id for a `member`.","example":"MBR-7c6f361b-e582-15b6-60c0-358f12466b4b","in":"path","name":"member_guid","required":true,"schema":{"type":"string"}}}></ParamsItem>
+
+<ParamsItem className={"paramsItem"} param={{"description":"The unique id for a `user`.","example":"USR-fa7537f3-48aa-a683-a02a-b18940482f54","in":"path","name":"user_guid","required":true,"schema":{"type":"string"}}}></ParamsItem>
+</ul>
+</div>
+</details>
+
+<div>
+<ApiTabs>
+<TabItem label={"204"} value={"204"}>
+<div>
 
 No Content
 
-</div><div></div></TabItem></ApiTabs></div>
+</div>
+
+<div></div>
+</TabItem>
+</ApiTabs>
+</div>
+
       

@@ -26,9 +26,89 @@ import TabItem from "@theme/TabItem";
 
 This endpoint returns the specified merchant_location resource.
 
-<details style={{"marginBottom":"1rem"}} data-collapsed={false} open={true}><summary style={{}}><strong>Path Parameters</strong></summary><div><ul><ParamsItem className={"paramsItem"} param={{"description":"The unique id for a `merchant_location`.","example":"MCH-09466f0a-fb58-9d1a-bae2-2af0afbea621","in":"path","name":"merchant_location_guid","required":true,"schema":{"type":"string"}}}></ParamsItem></ul></div></details><div><ApiTabs><TabItem label={"200"} value={"200"}><div>
+
+<details style={{"marginBottom":"1rem"}} data-collapsed={false} open={true}>
+<summary style={{}}>
+<strong>Path Parameters</strong>
+</summary>
+
+<div>
+<ul>
+<ParamsItem className={"paramsItem"} param={{"description":"The unique id for a `merchant_location`.","example":"MCH-09466f0a-fb58-9d1a-bae2-2af0afbea621","in":"path","name":"merchant_location_guid","required":true,"schema":{"type":"string"}}}></ParamsItem>
+</ul>
+</div>
+</details>
+
+<div>
+<ApiTabs>
+<TabItem label={"200"} value={"200"}>
+<div>
 
 OK
 
-</div><div><MimeTabs schemaType={"response"}><TabItem label={"application/vnd.mx.api.v1+json"} value={"application/vnd.mx.api.v1+json"}><SchemaTabs><TabItem label={"Schema"} value={"Schema"}><details style={{}} data-collapsed={false} open={true}><summary style={{"textAlign":"left"}}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}}><summary style={{}}><strong>merchant_location</strong><span style={{"opacity":"0.6"}}> object</span></summary><div style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"city"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"Greenwood Village","nullable":true,"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"country"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"US","nullable":true,"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"created_at"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"2020-04-13 21:05:09.000000000 Z","nullable":true,"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"guid"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"MCL-00024e59-18b5-4d79-b879-2a7896726fea","nullable":true,"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"latitude"} required={false} schemaName={"number"} qualifierMessage={undefined} schema={{"example":39.5963005,"nullable":true,"type":"number"}}></SchemaItem><SchemaItem collapsible={false} name={"longitude"} required={false} schemaName={"number"} qualifierMessage={undefined} schema={{"example":-104.89158799999998,"nullable":true,"type":"number"}}></SchemaItem><SchemaItem collapsible={false} name={"merchant_guid"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"MCH-09466f0a-fb58-9d1a-bae2-2af0afbea621","nullable":true,"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"phone_number"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"(303) 689-0728","nullable":true,"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"postal_code"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":801121436,"nullable":true,"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"state"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"CO","nullable":true,"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"street_address"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"8547 E Arapahoe Rd, Ste 1","nullable":true,"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"updated_at"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"2020-04-13 21:05:09.000000000 Z","nullable":true,"type":"string"}}></SchemaItem></div></details></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"merchant_location\": {\n    \"city\": \"Greenwood Village\",\n    \"country\": \"US\",\n    \"created_at\": \"2020-04-13 21:05:09.000000000 Z\",\n    \"guid\": \"MCL-00024e59-18b5-4d79-b879-2a7896726fea\",\n    \"latitude\": 39.5963005,\n    \"longitude\": -104.89158799999998,\n    \"merchant_guid\": \"MCH-09466f0a-fb58-9d1a-bae2-2af0afbea621\",\n    \"phone_number\": \"(303) 689-0728\",\n    \"postal_code\": 801121436,\n    \"state\": \"CO\",\n    \"street_address\": \"8547 E Arapahoe Rd, Ste 1\",\n    \"updated_at\": \"2020-04-13 21:05:09.000000000 Z\"\n  }\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div>
+</div>
+
+<div>
+<MimeTabs schemaType={"response"}>
+<TabItem label={"application/vnd.mx.api.v1+json"} value={"application/vnd.mx.api.v1+json"}>
+<SchemaTabs>
+<TabItem label={"Schema"} value={"Schema"}>
+<details style={{}} data-collapsed={false} open={true}>
+<summary style={{"textAlign":"left"}}>
+<strong>Schema</strong>
+</summary>
+
+<div style={{"textAlign":"left","marginLeft":"1rem"}}></div>
+
+<ul style={{"marginLeft":"1rem"}}>
+<SchemaItem collapsible={true} className={"schemaItem"}>
+<details style={{}}>
+<summary style={{}}>
+<strong>merchant_location</strong>
+
+<span style={{"opacity":"0.6"}}> object</span>
+</summary>
+
+<div style={{"marginLeft":"1rem"}}>
+<SchemaItem collapsible={false} name={"city"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"Greenwood Village","nullable":true,"type":"string"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"country"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"US","nullable":true,"type":"string"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"created_at"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"2020-04-13 21:05:09.000000000 Z","nullable":true,"type":"string"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"guid"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"MCL-00024e59-18b5-4d79-b879-2a7896726fea","nullable":true,"type":"string"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"latitude"} required={false} schemaName={"number"} qualifierMessage={undefined} schema={{"example":39.5963005,"nullable":true,"type":"number"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"longitude"} required={false} schemaName={"number"} qualifierMessage={undefined} schema={{"example":-104.89158799999998,"nullable":true,"type":"number"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"merchant_guid"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"MCH-09466f0a-fb58-9d1a-bae2-2af0afbea621","nullable":true,"type":"string"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"phone_number"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"(303) 689-0728","nullable":true,"type":"string"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"postal_code"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":801121436,"nullable":true,"type":"string"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"state"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"CO","nullable":true,"type":"string"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"street_address"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"8547 E Arapahoe Rd, Ste 1","nullable":true,"type":"string"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"updated_at"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"2020-04-13 21:05:09.000000000 Z","nullable":true,"type":"string"}}></SchemaItem>
+</div>
+</details>
+</SchemaItem>
+</ul>
+</details>
+</TabItem>
+
+<TabItem label={"Example (from schema)"} value={"Example (from schema)"}>
+<ResponseSamples responseExample={"{\n  \"merchant_location\": {\n    \"city\": \"Greenwood Village\",\n    \"country\": \"US\",\n    \"created_at\": \"2020-04-13 21:05:09.000000000 Z\",\n    \"guid\": \"MCL-00024e59-18b5-4d79-b879-2a7896726fea\",\n    \"latitude\": 39.5963005,\n    \"longitude\": -104.89158799999998,\n    \"merchant_guid\": \"MCH-09466f0a-fb58-9d1a-bae2-2af0afbea621\",\n    \"phone_number\": \"(303) 689-0728\",\n    \"postal_code\": 801121436,\n    \"state\": \"CO\",\n    \"street_address\": \"8547 E Arapahoe Rd, Ste 1\",\n    \"updated_at\": \"2020-04-13 21:05:09.000000000 Z\"\n  }\n}"} language={"json"}></ResponseSamples>
+</TabItem>
+</SchemaTabs>
+</TabItem>
+</MimeTabs>
+</div>
+</TabItem>
+</ApiTabs>
+</div>
+
       
