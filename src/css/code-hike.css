@@ -1,3 +1,14 @@
+/* Hide copy button by default, reveal on hover */
+.ch-codegroup .ch-editor-button,
+.ch-codeblock .ch-code-button {
+  display: none;
+}
+
+.ch-codegroup:hover .ch-editor-button,
+.ch-codeblock:hover .ch-code-button {
+  display: block;
+}
+
 .ch-scrollycoding-step-content {
   border-radius: 0;
   padding: 24px;

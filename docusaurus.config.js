@@ -12,7 +12,7 @@ const config = {
   title: "MX Docs",
   // tagline: "Dinosaurs are cool",
   url: "https://press.sand.internal.mx",
-  baseUrl: "/v2",
+  baseUrl: "/",
   onBrokenLinks: "warn", // TODO: change to throw for production
   onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",
@@ -23,7 +23,12 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          beforeDefaultRemarkPlugins: [[remarkCodeHike, { theme }]],
+          beforeDefaultRemarkPlugins: [
+            [
+              remarkCodeHike,
+              { theme, lineNumbers: true, showCopyButton: true, skipLanguages: ["mermaid"], },
+            ],
+          ],
           routeBasePath: "/", // Serve the docs at the site's root
           sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.

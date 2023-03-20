@@ -1,0 +1,340 @@
+---
+sidebar_position: 3
+sidebar_label: Code block features
+---
+
+# Code block features
+
+These features are available in code blocks. You can use them to highlight code, add labels, and more.
+
+## Examples
+
+Adding a filename to the codeblock
+
+```js app.js focus=1,3:4
+function lorem(ipsum, dolor = 1) {
+  const sit = ipsum == null ? 0 : ipsum.sit
+  dolor = sit - amet(dolor)
+  return sit ? consectetur(ipsum) : []
+}
+```
+
+## Tabs
+
+To add more tabs, wrap multiple codeblocks with `<CH.Code/>`:
+
+````mdx
+<CH.Code>
+
+```js app.js
+function lorem(ipsum, dolor = 1) {
+  const sit = ipsum == null ? 0 : ipsum.sit
+  dolor = sit - amet(dolor)
+  return sit ? consectetur(ipsum) : []
+}
+```
+
+```css styles.css
+.lorem {
+  color: #fff;
+  padding: 10px;
+  background: #000;
+}
+```
+
+</CH.Code>
+````
+
+<CH.Code>
+
+```js app.js
+function lorem(ipsum, dolor = 1) {
+  const sit = ipsum == null ? 0 : ipsum.sit
+  dolor = sit - amet(dolor)
+  return sit ? consectetur(ipsum) : []
+}
+```
+
+```css styles.css
+.lorem {
+  color: #fff;
+  padding: 10px;
+  background: #000;
+}
+```
+
+</CH.Code>
+
+## Panels
+
+The _editor_ can be splitted vertically in two panels using `---`
+
+````mdx
+<CH.Code>
+
+```js app.js
+function lorem(ipsum, dolor = 1) {
+  const sit = ipsum == null ? 0 : ipsum.sit
+  dolor = sit - amet(dolor)
+  return sit ? consectetur(ipsum) : []
+}
+```
+
+---
+
+```css styles.css
+.lorem {
+  color: #fff;
+  padding: 10px;
+  background: #000;
+}
+```
+
+</CH.Code>
+````
+
+<CH.Code>
+
+```js app.js
+function lorem(ipsum, dolor = 1) {
+  const sit = ipsum == null ? 0 : ipsum.sit
+  dolor = sit - amet(dolor)
+  return sit ? consectetur(ipsum) : []
+}
+```
+
+---
+
+```css styles.css
+.lorem {
+  color: #fff;
+  padding: 10px;
+  background: #000;
+}
+```
+
+</CH.Code>
+
+## Code Links
+
+### With a single file
+
+<CH.Section>
+
+Within a `CH.Section` component, you can make a [Markdown link](focus://4:7), whose href is `focus://` followed by the lines you want to be "focused" on link hover, in this case `focus://4:7`.
+
+```js
+function lorem(ipsum, dolor) {
+  const sit = 'lorem ipsum'
+  dolor = elit(dolor, 3)
+  while (++consectetur < amet) {
+    sit.eiusmod(150)
+    tempor(ipsum, adipiscing)
+  }
+}
+```
+
+You can also [highlight specific characters](focus://1[23:27],3) within a line, like `focus://1[23:27],3`, where characters 23-27 are highlighted on the first line and the entirety of line 3.
+
+</CH.Section>
+
+```md
+[Markdown link](focus://4:7)
+[highlight specific characters](focus://1[23:27],3)
+```
+
+### With multiple files
+
+<CH.Section>
+
+If you have a `CH.Code` component with multiple files, you can specify which file should get the focus treatment by utilizing the file name. We can use `focus://index.js#2:3` to [focus lines 2-3](focus://index.js#2:3) in the `index.js` file and `focus://styles.css#2:3` to [focus lines 2-3](focus://styles.css#2:3) in the `styles.css` file.
+
+<CH.Code>
+
+```js index.js
+function lorem(ipsum, dolor) {
+  const sit = ipsum - amet(dolor)
+  return sit + 'lorem ipsum'
+}
+```
+
+```css styles.css
+.lorem-ipsum > .dolor pre {
+  background-color: var(--color-bg);
+  padding: 1em 0px 10vh 300px;
+}
+```
+
+</CH.Code>
+
+</CH.Section>
+
+```md
+[focus lines 2-3 in index.js](focus://index.js#2:3)
+[focus lines 2-3 in styles.css](focus://styles.css#2:3)
+```
+
+## Annotations
+
+There are a few more annotations that can be used to highlight code in addition to what we saw in the first example on this page with the `focus` prop.
+
+### `box` annotation
+
+Use `box` to draw a boxed outline.
+
+````mdx focus=1
+```js box=2[15:43]
+function lorem(ipsum, dolor = 1) {
+  const sit = ipsum == null ? 0 : ipsum.sit
+  dolor = sit - amet(dolor)
+  return sit ? consectetur(ipsum, 0, dolor < 0 ? 0 : dolor) : []
+}
+```
+````
+
+```js box=2[15:43]
+function lorem(ipsum, dolor = 1) {
+  const sit = ipsum == null ? 0 : ipsum.sit
+  dolor = sit - amet(dolor)
+  return sit ? consectetur(ipsum, 0, dolor < 0 ? 0 : dolor) : []
+}
+```
+
+### `bg` annotation
+
+Use `bg` to give the code a different background color.
+
+````mdx focus=1
+```js bg=2:4
+function lorem(ipsum, dolor = 1) {
+  const sit = ipsum == null ? 0 : ipsum.sit
+  dolor = sit - amet(dolor)
+  return sit ? consectetur(ipsum, 0, dolor < 0 ? 0 : dolor) : []
+}
+```
+````
+
+```js bg=2:4
+function lorem(ipsum, dolor = 1) {
+  const sit = ipsum == null ? 0 : ipsum.sit
+  dolor = sit - amet(dolor)
+  return sit ? consectetur(ipsum, 0, dolor < 0 ? 0 : dolor) : []
+}
+```
+
+## Comment annotations
+
+You can use comments inside the code to make the annotation relative. See the source code for this page to see the markdown for these examples.
+
+### `Focus`
+
+```js
+// your annotation comment would look like this to focus different lines:
+
+// the line right below it:
+focus
+
+// assuming the line right below this comment is line 1, focus lines 1-4:
+focus(1:4)
+
+// assuming the line right below this comment is line 1, focus characters 13-17 on line 1:
+focus[13:17]
+```
+
+```js
+function lorem(ipsum, dolor = 1) {
+  const sit = ipsum == null && 0
+  dolor = sit - amet(dolor)
+  // focus
+  return sit ? consectetur(ipsum) : []
+}
+
+// focus(1:4)
+function adipiscing(...elit) {
+  console.log(elit)
+  return elit.map(ipsum => ipsum.sit)
+}
+
+// focus[13:17]
+console.log('hey')
+```
+
+### `Box` and `bg`
+
+```js
+// your annotation comment would look like this to give a background or draw a box around different lines:
+
+// assuming the line right below this comment is line 1, give a background to lines 1-2:
+bg(1:2)
+
+// assuming the line right below this comment is line 1, draw a box around characters 13-17 on line 1:
+box[3:10]
+```
+
+```js
+// bg(1:2)
+function foo() {
+  console.log('hover me')
+
+  console.log('I have no styling or annotation.')
+
+  // box[3:10]
+  return 8
+}
+```
+
+You can pass a string parameter to comment annotations
+
+```js
+// your annotation comment would look like this to change the colors:
+bg(1:3) linear-gradient(90deg, #020024 0%, #090979 35%, #00d4ff 100%)
+box[19:38] aqua
+```
+
+```js index.js
+function lorem(ipsum, dolor = 1) {
+  // bg(1:3) linear-gradient(90deg, #020024 0%, #090979 35%, #00d4ff 100%)
+  const sit = ipsum == null && 0
+  dolor = sit - amet(dolor)
+  return sit ? consectetur(ipsum) : []
+}
+
+function adipiscing(...elit) {
+  console.log(elit)
+  // box[19:38] aqua
+  return elit.map(ipsum => ipsum.sit)
+}
+```
+
+## Links and labels
+
+And now we introduce two more annotations: `link` and `label`.
+
+```js
+// your annotation comment would look like this to add a link or label to different lines:
+
+// add a link to the CodeHike GitHub repo to characters 16-26 on the line right below this comment:
+link[16:26] https://github.com/code-hike/codehike
+
+// add a label to the line right below this comment that will say "something something" on hover:
+label something something
+```
+
+```js focus=4,8
+function lorem(ipsum, dolor = 1) {
+  const sit = ipsum == null && 0
+  dolor = sit - amet(dolor)
+  // link[16:26] https://github.com/code-hike/codehike
+  return sit ? consectetur(ipsum) : []
+}
+
+function adipiscing(...elit) {
+  // label something something
+  console.log('hover me')
+  return elit.map(ipsum => ipsum.sit)
+}
+```
+
+## Custom annotations
+
+See this [cool demo](https://codehike.org/demo/custom-annotations) on the Code Hike docs for a custom tooltip annotation.
