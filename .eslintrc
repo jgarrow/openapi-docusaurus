@@ -1,0 +1,7 @@
+{
+  "extends": ["plugin:@docusaurus/recommended", "plugin:mdx/recommended"],
+  "plugins": ["@docusaurus"],
+  "settings": {
+    "mdx/code-blocks": true
+  }
+}

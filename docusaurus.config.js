@@ -3,6 +3,9 @@
 
 const lightCodeTheme = require("prism-react-renderer/themes/github");
 const darkCodeTheme = require("prism-react-renderer/themes/dracula");
+const theme = require("shiki/themes/nord.json");
+// const theme = require("./src/theme/codeTheme.json");
+const { remarkCodeHike } = require("@code-hike/mdx");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -20,37 +23,45 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          routeBasePath: '/', // Serve the docs at the site's root
+          beforeDefaultRemarkPlugins: [[remarkCodeHike, { theme }]],
+          routeBasePath: "/", // Serve the docs at the site's root
           sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           // editUrl:
           //   "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
           docLayoutComponent: "@theme/DocPage",
-          docItemComponent: "@theme/ApiItem" // Derived from docusaurus-theme-openapi
+          docItemComponent: "@theme/ApiItem", // Derived from docusaurus-theme-openapi
         },
         blog: false,
         theme: {
-          customCss: require.resolve("./src/css/custom.css")
-        }
-      })
-    ]
+          customCss: [
+            require.resolve("@code-hike/mdx/styles.css"),
+            require.resolve("./src/css/custom.css"),
+            require.resolve("./src/css/code-hike.css"),
+          ],
+        },
+      }),
+    ],
   ],
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      // algolia: {
+      //   contextualSearch: true,
+      // },
       docs: {
         sidebar: {
           autoCollapseCategories: true,
-          hideable: false
-        }
+          hideable: false,
+        },
       },
       navbar: {
         // title: "MX API Docs",
         logo: {
           alt: "MX docs logo",
-          src: "img/mx-docs.svg"
+          src: "img/mx-docs.svg",
         },
         items: [
           // ...getNavbarItems('./docs/products', {
@@ -68,7 +79,7 @@ const config = {
             items: [
               {
                 to: "/products/account-aggregation",
-                label: "Account Aggregation"
+                label: "Account Aggregation",
               },
               // {
               //   to: "/extended-transaction-history",
@@ -86,13 +97,13 @@ const config = {
               //   to: "/microdeposits",
               //   label: "Microdeposits"
               // },
-            ]
+            ],
           },
           { to: "/use-cases", label: "Use cases", position: "left" },
           {
             label: "API Reference",
             position: "left",
-            to: "/platform-api/mx-platform-api"
+            to: "/platform-api/mx-platform-api",
           },
           // {
           //   label: "More APIs",
@@ -108,8 +119,8 @@ const config = {
             href: "https://dashboard.mx.com",
             label: "Login",
             position: "right",
-          }
-        ]
+          },
+        ],
       },
       footer: {
         style: "dark",
@@ -119,48 +130,48 @@ const config = {
             items: [
               {
                 label: "Tutorial",
-                to: "/"
-              }
-            ]
+                to: "/",
+              },
+            ],
           },
           {
             title: "Community",
             items: [
               {
                 label: "Stack Overflow",
-                href: "https://stackoverflow.com/questions/tagged/docusaurus"
+                href: "https://stackoverflow.com/questions/tagged/docusaurus",
               },
               {
                 label: "Discord",
-                href: "https://discordapp.com/invite/docusaurus"
+                href: "https://discordapp.com/invite/docusaurus",
               },
               {
                 label: "Twitter",
-                href: "https://twitter.com/docusaurus"
-              }
-            ]
+                href: "https://twitter.com/docusaurus",
+              },
+            ],
           },
           {
             title: "More",
             items: [
               {
                 label: "GitHub",
-                href: "https://github.com/facebook/docusaurus"
-              }
-            ]
-          }
+                href: "https://github.com/facebook/docusaurus",
+              },
+            ],
+          },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`
+        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
       },
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
-        additionalLanguages: ["ruby", "csharp", "php"]
-      }
+        additionalLanguages: ["ruby", "csharp", "php"],
+      },
     }),
 
   plugins: [
-    async function myPlugin(context, options) {
+    async function tailwindPlugin(context, options) {
       return {
         name: "docusaurus-tailwindcss",
         configurePostCss(postcssOptions) {
@@ -187,14 +198,14 @@ const config = {
             sidebarOptions: {
               groupPathsBy: "tag",
               categoryLinkSource: "tag",
-            }
-          }
-        }
+            },
+          },
+        },
       },
     ],
   ],
 
-  themes: ["docusaurus-theme-openapi-docs"]
+  themes: ["docusaurus-theme-openapi-docs", "mdx-v2"],
 };
 
 module.exports = config;

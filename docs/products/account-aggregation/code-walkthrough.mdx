@@ -19,6 +19,12 @@ To aggregate using MXconnect, follow these instructions:
 
 The first step is to create a user. A user represents your end user in the MX Platform. Make a POST request to the [create user endpoint](/platform-api/create-user), as shown below.
 
+```js test.js
+const testFn = () => {
+  console.log("test");
+};
+```
+
 We recommend that you include a unique `id` of your choice with the request. You may also include `metadata`, such as the date the `user` was created or the end user's name. Don't include any sensitive information here, such as credentials.
 
 :::info
@@ -43,6 +49,7 @@ curl -i -X POST 'https://int-api.mx.com/users' \
       }
     }'
 ```
+
 ---
 
 ## 2. Request an MXconnect URL

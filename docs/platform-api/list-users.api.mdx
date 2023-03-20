@@ -26,9 +26,111 @@ import TabItem from "@theme/TabItem";
 
 Use this endpoint to list every user you've created in the MX Platform API.
 
-<details style={{"marginBottom":"1rem"}} data-collapsed={false} open={true}><summary style={{}}><strong>Query Parameters</strong></summary><div><ul><ParamsItem className={"paramsItem"} param={{"description":"Specify current page.","example":1,"in":"query","name":"page","schema":{"type":"integer"}}}></ParamsItem><ParamsItem className={"paramsItem"} param={{"description":"Specify records per page.","example":10,"in":"query","name":"records_per_page","schema":{"type":"integer"}}}></ParamsItem><ParamsItem className={"paramsItem"} param={{"description":"The user `id` to search for.","example":"u-12324-abdc","in":"query","name":"id","schema":{"type":"string"}}}></ParamsItem><ParamsItem className={"paramsItem"} param={{"description":"The user `email` to search for.","example":"example@example.com","in":"query","name":"email","schema":{"type":"string"}}}></ParamsItem><ParamsItem className={"paramsItem"} param={{"description":"Search for users that are diabled.","example":true,"in":"query","name":"is_disabled","schema":{"type":"boolean"}}}></ParamsItem></ul></div></details><div><ApiTabs><TabItem label={"200"} value={"200"}><div>
+
+<details style={{"marginBottom":"1rem"}} data-collapsed={false} open={true}>
+<summary style={{}}>
+<strong>Query Parameters</strong>
+</summary>
+
+<div>
+<ul>
+<ParamsItem className={"paramsItem"} param={{"description":"Specify current page.","example":1,"in":"query","name":"page","schema":{"type":"integer"}}}></ParamsItem>
+
+<ParamsItem className={"paramsItem"} param={{"description":"Specify records per page.","example":10,"in":"query","name":"records_per_page","schema":{"type":"integer"}}}></ParamsItem>
+
+<ParamsItem className={"paramsItem"} param={{"description":"The user `id` to search for.","example":"u-12324-abdc","in":"query","name":"id","schema":{"type":"string"}}}></ParamsItem>
+
+<ParamsItem className={"paramsItem"} param={{"description":"The user `email` to search for.","example":"example@example.com","in":"query","name":"email","schema":{"type":"string"}}}></ParamsItem>
+
+<ParamsItem className={"paramsItem"} param={{"description":"Search for users that are diabled.","example":true,"in":"query","name":"is_disabled","schema":{"type":"boolean"}}}></ParamsItem>
+</ul>
+</div>
+</details>
+
+<div>
+<ApiTabs>
+<TabItem label={"200"} value={"200"}>
+<div>
 
 OK
 
-</div><div><MimeTabs schemaType={"response"}><TabItem label={"application/vnd.mx.api.v1+json"} value={"application/vnd.mx.api.v1+json"}><SchemaTabs><TabItem label={"Schema"} value={"Schema"}><details style={{}} data-collapsed={false} open={true}><summary style={{"textAlign":"left"}}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}}><summary style={{}}><strong>pagination</strong><span style={{"opacity":"0.6"}}> object</span></summary><div style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"current_page"} required={false} schemaName={"integer"} qualifierMessage={undefined} schema={{"example":1,"type":"integer"}}></SchemaItem><SchemaItem collapsible={false} name={"per_page"} required={false} schemaName={"integer"} qualifierMessage={undefined} schema={{"example":25,"type":"integer"}}></SchemaItem><SchemaItem collapsible={false} name={"total_entries"} required={false} schemaName={"integer"} qualifierMessage={undefined} schema={{"example":1,"type":"integer"}}></SchemaItem><SchemaItem collapsible={false} name={"total_pages"} required={false} schemaName={"integer"} qualifierMessage={undefined} schema={{"example":1,"type":"integer"}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}}><summary style={{}}><strong>users</strong><span style={{"opacity":"0.6"}}> object[]</span></summary><div style={{"marginLeft":"1rem"}}><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"email"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"email@provider.com","nullable":true,"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"guid"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"USR-d74cb14f-fd0a-449f-991b-e0362a63d9c6","nullable":true,"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"id"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"My-Unique-ID","nullable":true,"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"is_disabled"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"example":false,"nullable":true,"type":"boolean"}}></SchemaItem><SchemaItem collapsible={false} name={"metadata"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"{\\\"first_name\\\": \\\"Steven\\\", \\\"last_name\\\": \\\"Universe\\\"}","nullable":true,"type":"string"}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"pagination\": {\n    \"current_page\": 1,\n    \"per_page\": 25,\n    \"total_entries\": 1,\n    \"total_pages\": 1\n  },\n  \"users\": [\n    {\n      \"email\": \"email@provider.com\",\n      \"guid\": \"USR-d74cb14f-fd0a-449f-991b-e0362a63d9c6\",\n      \"id\": \"My-Unique-ID\",\n      \"is_disabled\": false,\n      \"metadata\": \"{\\\\\\\"first_name\\\\\\\": \\\\\\\"Steven\\\\\\\", \\\\\\\"last_name\\\\\\\": \\\\\\\"Universe\\\\\\\"}\"\n    }\n  ]\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div>
+</div>
+
+<div>
+<MimeTabs schemaType={"response"}>
+<TabItem label={"application/vnd.mx.api.v1+json"} value={"application/vnd.mx.api.v1+json"}>
+<SchemaTabs>
+<TabItem label={"Schema"} value={"Schema"}>
+<details style={{}} data-collapsed={false} open={true}>
+<summary style={{"textAlign":"left"}}>
+<strong>Schema</strong>
+</summary>
+
+<div style={{"textAlign":"left","marginLeft":"1rem"}}></div>
+
+<ul style={{"marginLeft":"1rem"}}>
+<SchemaItem collapsible={true} className={"schemaItem"}>
+<details style={{}}>
+<summary style={{}}>
+<strong>pagination</strong>
+
+<span style={{"opacity":"0.6"}}> object</span>
+</summary>
+
+<div style={{"marginLeft":"1rem"}}>
+<SchemaItem collapsible={false} name={"current_page"} required={false} schemaName={"integer"} qualifierMessage={undefined} schema={{"example":1,"type":"integer"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"per_page"} required={false} schemaName={"integer"} qualifierMessage={undefined} schema={{"example":25,"type":"integer"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"total_entries"} required={false} schemaName={"integer"} qualifierMessage={undefined} schema={{"example":1,"type":"integer"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"total_pages"} required={false} schemaName={"integer"} qualifierMessage={undefined} schema={{"example":1,"type":"integer"}}></SchemaItem>
+</div>
+</details>
+</SchemaItem>
+
+<SchemaItem collapsible={true} className={"schemaItem"}>
+<details style={{}}>
+<summary style={{}}>
+<strong>users</strong>
+
+<span style={{"opacity":"0.6"}}> object[]</span>
+</summary>
+
+<div style={{"marginLeft":"1rem"}}>
+<li>
+<div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div>
+</li>
+
+<SchemaItem collapsible={false} name={"email"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"email@provider.com","nullable":true,"type":"string"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"guid"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"USR-d74cb14f-fd0a-449f-991b-e0362a63d9c6","nullable":true,"type":"string"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"id"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"My-Unique-ID","nullable":true,"type":"string"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"is_disabled"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"example":false,"nullable":true,"type":"boolean"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"metadata"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"{\\\"first_name\\\": \\\"Steven\\\", \\\"last_name\\\": \\\"Universe\\\"}","nullable":true,"type":"string"}}></SchemaItem>
+
+<li>
+<div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div>
+</li>
+</div>
+</details>
+</SchemaItem>
+</ul>
+</details>
+</TabItem>
+
+<TabItem label={"Example (from schema)"} value={"Example (from schema)"}>
+<ResponseSamples responseExample={"{\n  \"pagination\": {\n    \"current_page\": 1,\n    \"per_page\": 25,\n    \"total_entries\": 1,\n    \"total_pages\": 1\n  },\n  \"users\": [\n    {\n      \"email\": \"email@provider.com\",\n      \"guid\": \"USR-d74cb14f-fd0a-449f-991b-e0362a63d9c6\",\n      \"id\": \"My-Unique-ID\",\n      \"is_disabled\": false,\n      \"metadata\": \"{\\\\\\\"first_name\\\\\\\": \\\\\\\"Steven\\\\\\\", \\\\\\\"last_name\\\\\\\": \\\\\\\"Universe\\\\\\\"}\"\n    }\n  ]\n}"} language={"json"}></ResponseSamples>
+</TabItem>
+</SchemaTabs>
+</TabItem>
+</MimeTabs>
+</div>
+</TabItem>
+</ApiTabs>
+</div>
+
       

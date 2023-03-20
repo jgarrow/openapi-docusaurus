@@ -26,9 +26,81 @@ import TabItem from "@theme/TabItem";
 
 Use this endpoint to read the attributes of a default category.
 
-<details style={{"marginBottom":"1rem"}} data-collapsed={false} open={true}><summary style={{}}><strong>Path Parameters</strong></summary><div><ul><ParamsItem className={"paramsItem"} param={{"description":"The unique id for a `category`.","example":"CAT-7829f71c-2e8c-afa5-2f55-fa3634b89874","in":"path","name":"category_guid","required":true,"schema":{"type":"string"}}}></ParamsItem></ul></div></details><div><ApiTabs><TabItem label={"200"} value={"200"}><div>
+
+<details style={{"marginBottom":"1rem"}} data-collapsed={false} open={true}>
+<summary style={{}}>
+<strong>Path Parameters</strong>
+</summary>
+
+<div>
+<ul>
+<ParamsItem className={"paramsItem"} param={{"description":"The unique id for a `category`.","example":"CAT-7829f71c-2e8c-afa5-2f55-fa3634b89874","in":"path","name":"category_guid","required":true,"schema":{"type":"string"}}}></ParamsItem>
+</ul>
+</div>
+</details>
+
+<div>
+<ApiTabs>
+<TabItem label={"200"} value={"200"}>
+<div>
 
 OK
 
-</div><div><MimeTabs schemaType={"response"}><TabItem label={"application/vnd.mx.api.v1+json"} value={"application/vnd.mx.api.v1+json"}><SchemaTabs><TabItem label={"Schema"} value={"Schema"}><details style={{}} data-collapsed={false} open={true}><summary style={{"textAlign":"left"}}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}}><summary style={{}}><strong>category</strong><span style={{"opacity":"0.6"}}> object</span></summary><div style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"created_at"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"2015-04-13T18:01:23.000Z","nullable":true,"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"guid"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"CAT-7829f71c-2e8c-afa5-2f55-fa3634b89874","nullable":true,"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"is_default"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"example":true,"nullable":true,"type":"boolean"}}></SchemaItem><SchemaItem collapsible={false} name={"is_income"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"example":false,"nullable":true,"type":"boolean"}}></SchemaItem><SchemaItem collapsible={false} name={"metadata"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"some metadata","nullable":true,"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"name"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"Auto Insurance","nullable":true,"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"parent_guid"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"CAT-7829f71c-2e8c-afa5-2f55-fa3634b89874","nullable":true,"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"updated_at"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"2015-05-13T18:01:23.000Z","nullable":true,"type":"string"}}></SchemaItem></div></details></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"category\": {\n    \"created_at\": \"2015-04-13T18:01:23.000Z\",\n    \"guid\": \"CAT-7829f71c-2e8c-afa5-2f55-fa3634b89874\",\n    \"is_default\": true,\n    \"is_income\": false,\n    \"metadata\": \"some metadata\",\n    \"name\": \"Auto Insurance\",\n    \"parent_guid\": \"CAT-7829f71c-2e8c-afa5-2f55-fa3634b89874\",\n    \"updated_at\": \"2015-05-13T18:01:23.000Z\"\n  }\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div>
+</div>
+
+<div>
+<MimeTabs schemaType={"response"}>
+<TabItem label={"application/vnd.mx.api.v1+json"} value={"application/vnd.mx.api.v1+json"}>
+<SchemaTabs>
+<TabItem label={"Schema"} value={"Schema"}>
+<details style={{}} data-collapsed={false} open={true}>
+<summary style={{"textAlign":"left"}}>
+<strong>Schema</strong>
+</summary>
+
+<div style={{"textAlign":"left","marginLeft":"1rem"}}></div>
+
+<ul style={{"marginLeft":"1rem"}}>
+<SchemaItem collapsible={true} className={"schemaItem"}>
+<details style={{}}>
+<summary style={{}}>
+<strong>category</strong>
+
+<span style={{"opacity":"0.6"}}> object</span>
+</summary>
+
+<div style={{"marginLeft":"1rem"}}>
+<SchemaItem collapsible={false} name={"created_at"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"2015-04-13T18:01:23.000Z","nullable":true,"type":"string"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"guid"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"CAT-7829f71c-2e8c-afa5-2f55-fa3634b89874","nullable":true,"type":"string"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"is_default"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"example":true,"nullable":true,"type":"boolean"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"is_income"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"example":false,"nullable":true,"type":"boolean"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"metadata"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"some metadata","nullable":true,"type":"string"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"name"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"Auto Insurance","nullable":true,"type":"string"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"parent_guid"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"CAT-7829f71c-2e8c-afa5-2f55-fa3634b89874","nullable":true,"type":"string"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"updated_at"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"2015-05-13T18:01:23.000Z","nullable":true,"type":"string"}}></SchemaItem>
+</div>
+</details>
+</SchemaItem>
+</ul>
+</details>
+</TabItem>
+
+<TabItem label={"Example (from schema)"} value={"Example (from schema)"}>
+<ResponseSamples responseExample={"{\n  \"category\": {\n    \"created_at\": \"2015-04-13T18:01:23.000Z\",\n    \"guid\": \"CAT-7829f71c-2e8c-afa5-2f55-fa3634b89874\",\n    \"is_default\": true,\n    \"is_income\": false,\n    \"metadata\": \"some metadata\",\n    \"name\": \"Auto Insurance\",\n    \"parent_guid\": \"CAT-7829f71c-2e8c-afa5-2f55-fa3634b89874\",\n    \"updated_at\": \"2015-05-13T18:01:23.000Z\"\n  }\n}"} language={"json"}></ResponseSamples>
+</TabItem>
+</SchemaTabs>
+</TabItem>
+</MimeTabs>
+</div>
+</TabItem>
+</ApiTabs>
+</div>
+
       

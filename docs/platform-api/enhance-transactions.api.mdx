@@ -26,13 +26,163 @@ import TabItem from "@theme/TabItem";
 
 Use this endpoint to categorize, cleanse, and classify transactions. These transactions are not persisted or stored on the MX platform.
 
-<MimeTabs><TabItem label={"application/json"} value={"application/json-schema"}><details style={{}} data-collapsed={false} open={true}><summary style={{"textAlign":"left"}}><strong>Request Body</strong><strong style={{"fontSize":"var(--ifm-code-font-size)","color":"var(--openapi-required)"}}> required</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}><div style={{"marginTop":"1rem","marginBottom":"1rem"}}>
+
+<MimeTabs>
+<TabItem label={"application/json"} value={"application/json-schema"}>
+<details style={{}} data-collapsed={false} open={true}>
+<summary style={{"textAlign":"left"}}>
+<strong>Request Body</strong>
+
+<strong style={{"fontSize":"var(--ifm-code-font-size)","color":"var(--openapi-required)"}}> required</strong>
+</summary>
+
+<div style={{"textAlign":"left","marginLeft":"1rem"}}>
+<div style={{"marginTop":"1rem","marginBottom":"1rem"}}>
 
 Transaction object to be enhanced
 
-</div></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}}><summary style={{}}><strong>transactions</strong><span style={{"opacity":"0.6"}}> object[]</span></summary><div style={{"marginLeft":"1rem"}}><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"amount"} required={false} schemaName={"number"} qualifierMessage={undefined} schema={{"example":21.33,"type":"number"}}></SchemaItem><SchemaItem collapsible={false} name={"description"} required={true} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"ubr* pending.uber.com","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"extended_transaction_type"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"partner_transaction_type","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"id"} required={true} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"ID-123","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"memo"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"Additional-information*on_transaction","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"merchant_category_code"} required={false} schemaName={"integer"} qualifierMessage={undefined} schema={{"example":4121,"type":"integer"}}></SchemaItem><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"DEBIT","type":"string"}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem></ul></details></TabItem></MimeTabs><div><ApiTabs><TabItem label={"200"} value={"200"}><div>
+</div>
+</div>
+
+<ul style={{"marginLeft":"1rem"}}>
+<SchemaItem collapsible={true} className={"schemaItem"}>
+<details style={{}}>
+<summary style={{}}>
+<strong>transactions</strong>
+
+<span style={{"opacity":"0.6"}}> object[]</span>
+</summary>
+
+<div style={{"marginLeft":"1rem"}}>
+<li>
+<div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div>
+</li>
+
+<SchemaItem collapsible={false} name={"amount"} required={false} schemaName={"number"} qualifierMessage={undefined} schema={{"example":21.33,"type":"number"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"description"} required={true} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"ubr* pending.uber.com","type":"string"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"extended_transaction_type"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"partner_transaction_type","type":"string"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"id"} required={true} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"ID-123","type":"string"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"memo"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"Additional-information*on_transaction","type":"string"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"merchant_category_code"} required={false} schemaName={"integer"} qualifierMessage={undefined} schema={{"example":4121,"type":"integer"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"type"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"DEBIT","type":"string"}}></SchemaItem>
+
+<li>
+<div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div>
+</li>
+</div>
+</details>
+</SchemaItem>
+</ul>
+</details>
+</TabItem>
+</MimeTabs>
+
+<div>
+<ApiTabs>
+<TabItem label={"200"} value={"200"}>
+<div>
 
 OK
 
-</div><div><MimeTabs schemaType={"response"}><TabItem label={"application/vnd.mx.api.v1+json"} value={"application/vnd.mx.api.v1+json"}><SchemaTabs><TabItem label={"Schema"} value={"Schema"}><details style={{}} data-collapsed={false} open={true}><summary style={{"textAlign":"left"}}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}}><summary style={{}}><strong>transactions</strong><span style={{"opacity":"0.6"}}> object[]</span></summary><div style={{"marginLeft":"1rem"}}><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"amount"} required={false} schemaName={"number"} qualifierMessage={undefined} schema={{"example":21.33,"nullable":true,"type":"number"}}></SchemaItem><SchemaItem collapsible={false} name={"categorized_by"} required={false} schemaName={"integer"} qualifierMessage={undefined} schema={{"example":13,"nullable":true,"type":"integer"}}></SchemaItem><SchemaItem collapsible={false} name={"category"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"Rental Car & Taxi","nullable":true,"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"category_guid"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"CAT-9588eaad-90a4-bb5c-66c8-1812503d0db8","nullable":true,"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"described_by"} required={false} schemaName={"integer"} qualifierMessage={undefined} schema={{"example":6,"nullable":true,"type":"integer"}}></SchemaItem><SchemaItem collapsible={false} name={"description"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"Uber","nullable":true,"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"extended_transaction_type"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"partner_transaction_type","nullable":true,"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"id"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"ID-123","nullable":true,"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"is_bill_pay"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"example":false,"nullable":true,"type":"boolean"}}></SchemaItem><SchemaItem collapsible={false} name={"is_direct_deposit"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"example":false,"nullable":true,"type":"boolean"}}></SchemaItem><SchemaItem collapsible={false} name={"is_expense"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"example":false,"nullable":true,"type":"boolean"}}></SchemaItem><SchemaItem collapsible={false} name={"is_fee"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"example":false,"nullable":true,"type":"boolean"}}></SchemaItem><SchemaItem collapsible={false} name={"is_income"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"example":false,"nullable":true,"type":"boolean"}}></SchemaItem><SchemaItem collapsible={false} name={"is_international"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"example":false,"nullable":true,"type":"boolean"}}></SchemaItem><SchemaItem collapsible={false} name={"is_overdraft_fee"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"example":false,"nullable":true,"type":"boolean"}}></SchemaItem><SchemaItem collapsible={false} name={"is_payroll_advance"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"example":false,"nullable":true,"type":"boolean"}}></SchemaItem><SchemaItem collapsible={false} name={"is_subscription"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"example":false,"nullable":true,"type":"boolean"}}></SchemaItem><SchemaItem collapsible={false} name={"memo"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"Additional-information*on_transaction","nullable":true,"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"merchant_category_code"} required={false} schemaName={"integer"} qualifierMessage={undefined} schema={{"example":4121,"nullable":true,"type":"integer"}}></SchemaItem><SchemaItem collapsible={false} name={"merchant_guid"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"MCH-14f25b63-ef47-a38e-b2b6-d02b280b6e4e","nullable":true,"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"merchant_location_guid"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"MCL-00024e59-18b5-4d79-b879-2a7896726fea","nullable":true,"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"original_description"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"ubr* pending.uber.com","nullable":true,"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"DEBIT","nullable":true,"type":"string"}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"transactions\": [\n    {\n      \"amount\": 21.33,\n      \"categorized_by\": 13,\n      \"category\": \"Rental Car & Taxi\",\n      \"category_guid\": \"CAT-9588eaad-90a4-bb5c-66c8-1812503d0db8\",\n      \"described_by\": 6,\n      \"description\": \"Uber\",\n      \"extended_transaction_type\": \"partner_transaction_type\",\n      \"id\": \"ID-123\",\n      \"is_bill_pay\": false,\n      \"is_direct_deposit\": false,\n      \"is_expense\": false,\n      \"is_fee\": false,\n      \"is_income\": false,\n      \"is_international\": false,\n      \"is_overdraft_fee\": false,\n      \"is_payroll_advance\": false,\n      \"is_subscription\": false,\n      \"memo\": \"Additional-information*on_transaction\",\n      \"merchant_category_code\": 4121,\n      \"merchant_guid\": \"MCH-14f25b63-ef47-a38e-b2b6-d02b280b6e4e\",\n      \"merchant_location_guid\": \"MCL-00024e59-18b5-4d79-b879-2a7896726fea\",\n      \"original_description\": \"ubr* pending.uber.com\",\n      \"type\": \"DEBIT\"\n    }\n  ]\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div>
+</div>
+
+<div>
+<MimeTabs schemaType={"response"}>
+<TabItem label={"application/vnd.mx.api.v1+json"} value={"application/vnd.mx.api.v1+json"}>
+<SchemaTabs>
+<TabItem label={"Schema"} value={"Schema"}>
+<details style={{}} data-collapsed={false} open={true}>
+<summary style={{"textAlign":"left"}}>
+<strong>Schema</strong>
+</summary>
+
+<div style={{"textAlign":"left","marginLeft":"1rem"}}></div>
+
+<ul style={{"marginLeft":"1rem"}}>
+<SchemaItem collapsible={true} className={"schemaItem"}>
+<details style={{}}>
+<summary style={{}}>
+<strong>transactions</strong>
+
+<span style={{"opacity":"0.6"}}> object[]</span>
+</summary>
+
+<div style={{"marginLeft":"1rem"}}>
+<li>
+<div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div>
+</li>
+
+<SchemaItem collapsible={false} name={"amount"} required={false} schemaName={"number"} qualifierMessage={undefined} schema={{"example":21.33,"nullable":true,"type":"number"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"categorized_by"} required={false} schemaName={"integer"} qualifierMessage={undefined} schema={{"example":13,"nullable":true,"type":"integer"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"category"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"Rental Car & Taxi","nullable":true,"type":"string"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"category_guid"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"CAT-9588eaad-90a4-bb5c-66c8-1812503d0db8","nullable":true,"type":"string"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"described_by"} required={false} schemaName={"integer"} qualifierMessage={undefined} schema={{"example":6,"nullable":true,"type":"integer"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"description"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"Uber","nullable":true,"type":"string"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"extended_transaction_type"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"partner_transaction_type","nullable":true,"type":"string"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"id"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"ID-123","nullable":true,"type":"string"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"is_bill_pay"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"example":false,"nullable":true,"type":"boolean"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"is_direct_deposit"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"example":false,"nullable":true,"type":"boolean"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"is_expense"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"example":false,"nullable":true,"type":"boolean"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"is_fee"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"example":false,"nullable":true,"type":"boolean"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"is_income"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"example":false,"nullable":true,"type":"boolean"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"is_international"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"example":false,"nullable":true,"type":"boolean"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"is_overdraft_fee"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"example":false,"nullable":true,"type":"boolean"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"is_payroll_advance"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"example":false,"nullable":true,"type":"boolean"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"is_subscription"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"example":false,"nullable":true,"type":"boolean"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"memo"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"Additional-information*on_transaction","nullable":true,"type":"string"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"merchant_category_code"} required={false} schemaName={"integer"} qualifierMessage={undefined} schema={{"example":4121,"nullable":true,"type":"integer"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"merchant_guid"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"MCH-14f25b63-ef47-a38e-b2b6-d02b280b6e4e","nullable":true,"type":"string"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"merchant_location_guid"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"MCL-00024e59-18b5-4d79-b879-2a7896726fea","nullable":true,"type":"string"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"original_description"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"ubr* pending.uber.com","nullable":true,"type":"string"}}></SchemaItem>
+
+<SchemaItem collapsible={false} name={"type"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"example":"DEBIT","nullable":true,"type":"string"}}></SchemaItem>
+
+<li>
+<div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div>
+</li>
+</div>
+</details>
+</SchemaItem>
+</ul>
+</details>
+</TabItem>
+
+<TabItem label={"Example (from schema)"} value={"Example (from schema)"}>
+<ResponseSamples responseExample={"{\n  \"transactions\": [\n    {\n      \"amount\": 21.33,\n      \"categorized_by\": 13,\n      \"category\": \"Rental Car & Taxi\",\n      \"category_guid\": \"CAT-9588eaad-90a4-bb5c-66c8-1812503d0db8\",\n      \"described_by\": 6,\n      \"description\": \"Uber\",\n      \"extended_transaction_type\": \"partner_transaction_type\",\n      \"id\": \"ID-123\",\n      \"is_bill_pay\": false,\n      \"is_direct_deposit\": false,\n      \"is_expense\": false,\n      \"is_fee\": false,\n      \"is_income\": false,\n      \"is_international\": false,\n      \"is_overdraft_fee\": false,\n      \"is_payroll_advance\": false,\n      \"is_subscription\": false,\n      \"memo\": \"Additional-information*on_transaction\",\n      \"merchant_category_code\": 4121,\n      \"merchant_guid\": \"MCH-14f25b63-ef47-a38e-b2b6-d02b280b6e4e\",\n      \"merchant_location_guid\": \"MCL-00024e59-18b5-4d79-b879-2a7896726fea\",\n      \"original_description\": \"ubr* pending.uber.com\",\n      \"type\": \"DEBIT\"\n    }\n  ]\n}"} language={"json"}></ResponseSamples>
+</TabItem>
+</SchemaTabs>
+</TabItem>
+</MimeTabs>
+</div>
+</TabItem>
+</ApiTabs>
+</div>
+
       
