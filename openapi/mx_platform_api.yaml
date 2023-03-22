@@ -5448,8 +5448,8 @@ paths:
 security:
   - basicAuth: []
 servers:
-  - url: https://api.mx.com
   - url: https://int-api.mx.com
+  - url: https://api.mx.com
 tags:
   - name: categories
     description: Categories and subcategories offered within the MX Platform API.
