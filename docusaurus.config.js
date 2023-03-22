@@ -12,7 +12,7 @@ const config = {
   title: "MX Docs",
   // tagline: "Dinosaurs are cool",
   url: "https://press.sand.internal.mx",
-  baseUrl: "/v2",
+  baseUrl: "/",
   onBrokenLinks: "warn", // TODO: change to throw for production
   onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",
