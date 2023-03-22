@@ -201,6 +201,7 @@ const config = {
           "platform-api": {
             label: "Platform API",
             specPath: "openapi/mx_platform_api.yaml",
+            hideSendButton: true,
             proxy: "api",
             // specPath: "https://api.redocly.com/registry/bundle/mx-test/MX%20Platform/v1/openapi.yaml?branch=main",
             outputDir: "docs/platform-api",
