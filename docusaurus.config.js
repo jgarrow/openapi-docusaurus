@@ -53,9 +53,14 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      // algolia: {
-      //   contextualSearch: true,
-      // },
+      // https://docusaurus.io/docs/search
+      algolia: {
+        // contextualSearch: true,
+        // TODO: Replace with your own values once docs are indexed
+        appId: "R2IYF7ETH7",
+        apiKey: "599cec31baffa4868cae4e79f180729b",
+        indexName: "docsearch"
+      },
       docs: {
         sidebar: {
           autoCollapseCategories: true,
