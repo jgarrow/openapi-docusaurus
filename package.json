@@ -2,6 +2,11 @@
   "name": "openapi-docusaurus",
   "version": "0.0.0",
   "private": true,
+  "workspaces": {
+    "packages": [
+      "plugins/*"
+    ]
+  },
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
@@ -25,7 +30,6 @@
     "@mdx-js/react": "2",
     "autoprefixer": "^10.4.13",
     "clsx": "^1.1.1",
-    "docusaurus-plugin-openapi-docs": "^1.5.2",
     "docusaurus-theme-mdx-v2": "^0.1.2",
     "docusaurus-theme-openapi-docs": "^1.5.2",
     "lucide-react": "^0.124.0",
