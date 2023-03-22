@@ -1,0 +1,6 @@
+[[redirects]]
+  from = "/*"
+  to = "https://int-api.mx.com/:splat"
+  status = 200
+  force = true # ensure that we always redirect for the CORS proxy
+  headers = {X-From = "Netlify"}

@@ -3,6 +3,9 @@
   "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.json"],
   "exclude": ["**/node_modules/**"],
   "compilerOptions": {
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "noEmit": true,
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]

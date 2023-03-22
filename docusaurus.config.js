@@ -12,7 +12,7 @@ const config = {
   title: "MX Docs",
   // tagline: "Dinosaurs are cool",
   url: "https://press.sand.internal.mx",
-  baseUrl: "/",
+  baseUrl: "/v2",
   onBrokenLinks: "warn", // TODO: change to throw for production
   onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",
@@ -188,7 +188,7 @@ const config = {
       };
     },
     [
-      "docusaurus-plugin-openapi-docs",
+      "./plugins/docusaurus-plugin-openapi-docs",
       {
         id: "openapi",
         docsPluginId: "classic",

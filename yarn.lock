@@ -1902,7 +1902,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/mdx-loader@npm:2.2.0, @docusaurus/mdx-loader@npm:^2.0.1":
+"@docusaurus/mdx-loader@npm:2.2.0, @docusaurus/mdx-loader@npm:>=2.0.1 <2.3.0, @docusaurus/mdx-loader@npm:^2.0.1":
   version: 2.2.0
   resolution: "@docusaurus/mdx-loader@npm:2.2.0"
   dependencies:
@@ -1930,7 +1930,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/module-type-aliases@npm:2.2.0":
+"@docusaurus/module-type-aliases@npm:2.2.0, @docusaurus/module-type-aliases@npm:>=2.0.1 <2.3.0":
   version: 2.2.0
   resolution: "@docusaurus/module-type-aliases@npm:2.2.0"
   dependencies:
@@ -1995,7 +1995,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/plugin-content-docs@npm:2.2.0, @docusaurus/plugin-content-docs@npm:^2.0.1":
+"@docusaurus/plugin-content-docs@npm:2.2.0, @docusaurus/plugin-content-docs@npm:>=2.0.1 <2.3.0, @docusaurus/plugin-content-docs@npm:^2.0.1":
   version: 2.2.0
   resolution: "@docusaurus/plugin-content-docs@npm:2.2.0"
   dependencies:
@@ -2241,7 +2241,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/types@npm:2.2.0":
+"@docusaurus/types@npm:2.2.0, @docusaurus/types@npm:>=2.0.1 <2.3.0":
   version: 2.2.0
   resolution: "@docusaurus/types@npm:2.2.0"
   dependencies:
@@ -2293,7 +2293,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/utils-validation@npm:2.2.0, @docusaurus/utils-validation@npm:^2.0.1":
+"@docusaurus/utils-validation@npm:2.2.0, @docusaurus/utils-validation@npm:>=2.0.1 <2.3.0, @docusaurus/utils-validation@npm:^2.0.1":
   version: 2.2.0
   resolution: "@docusaurus/utils-validation@npm:2.2.0"
   dependencies:
@@ -2329,7 +2329,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/utils@npm:2.2.0, @docusaurus/utils@npm:^2.0.1":
+"@docusaurus/utils@npm:2.2.0, @docusaurus/utils@npm:>=2.0.1 <2.3.0, @docusaurus/utils@npm:^2.0.1":
   version: 2.2.0
   resolution: "@docusaurus/utils@npm:2.2.0"
   dependencies:
@@ -3168,6 +3168,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/fs-extra@npm:^9.0.13":
+  version: 9.0.13
+  resolution: "@types/fs-extra@npm:9.0.13"
+  dependencies:
+    "@types/node": "npm:*"
+  checksum: c46cad9514da52203eeed1cd72cb4caef3540edf2f3d64116febb36a5c5028478d5d3247f3894bb967872872b5aaa2c5628802056c05cd3543562d8ee9c182a0
+  languageName: node
+  linkType: hard
+
 "@types/hast@npm:^2.0.0":
   version: 2.3.4
   resolution: "@types/hast@npm:2.3.4"
@@ -3235,6 +3244,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/js-yaml@npm:^4.0.5":
+  version: 4.0.5
+  resolution: "@types/js-yaml@npm:4.0.5"
+  checksum: 586a99838928dc20d7e8826b3d8cab16ae131e36c00e7be4c519c51d30e90d0cbdfa92b4b5564bb1f3168c830e9750816c5e004577da0d207496da16bb0d0487
+  languageName: node
+  linkType: hard
+
+"@types/json-pointer@npm:^1.0.31":
+  version: 1.0.31
+  resolution: "@types/json-pointer@npm:1.0.31"
+  checksum: 039e019b3a6fa660f30a3fb49713ea4e549585a0dcbcf15defb161d8e2d11b5da20586d85fa371855e843da241e4b923c75b279738a9ee859398a62dce9fa798
+  languageName: node
+  linkType: hard
+
 "@types/json-schema@npm:*, @types/json-schema@npm:^7.0.4, @types/json-schema@npm:^7.0.5, @types/json-schema@npm:^7.0.6, @types/json-schema@npm:^7.0.8, @types/json-schema@npm:^7.0.9":
   version: 7.0.11
   resolution: "@types/json-schema@npm:7.0.11"
@@ -3248,6 +3271,13 @@ __metadata:
   dependencies:
     "@types/node": "npm:*"
   checksum: c1fbfe6e2a8c82656c8fc5782d937c82ed336cdca451c4d7a8d08d245531ad21572024d621b38071d34cfb7461702eea79fcf222a03264f00564d75e78bd348d
+  languageName: node
+  linkType: hard
+
+"@types/lodash@npm:^4.14.176":
+  version: 4.14.191
+  resolution: "@types/lodash@npm:4.14.191"
+  checksum: e8762fec34eec79828b6b1e08243e25703bfad1b53a7032c0293b69f51d222c0a36ae08d3588ab8147c6a3f478096e02186a860b909cdbe29c7c745cefea2442
   languageName: node
   linkType: hard
 
@@ -3278,6 +3308,13 @@ __metadata:
   version: 0.7.31
   resolution: "@types/ms@npm:0.7.31"
   checksum: cccb52777bb683c65ac5bab61351cd3910c9ce3512b1d903a591fc9694bb83afad6e48bf0beee5b47b6a8b620a05f5d82f8febfd55de05e7d9eb93586cc196c8
+  languageName: node
+  linkType: hard
+
+"@types/mustache@npm:^4.1.2":
+  version: 4.2.2
+  resolution: "@types/mustache@npm:4.2.2"
+  checksum: c20af86032df6c733af33f72f92ba48be10034c0ecab385addc1789432b714251513966675f3cb502863bc712d8c8936812e0fd548e91b196c35ad2786d3e506
   languageName: node
   linkType: hard
 
@@ -5774,6 +5811,46 @@ __metadata:
   checksum: 1e981843c153ed9b6a8fb3f72dcdc58f48373d8a51ad3ded4548f36e33e0f11d251c212efc5d0748c85ad42ac2e4bd28b4222c70484cada471ed104f12cf8db2
   languageName: node
   linkType: hard
+
+"docusaurus-plugin-openapi-docs@workspace:plugins/docusaurus-plugin-openapi-docs":
+  version: 0.0.0-use.local
+  resolution: "docusaurus-plugin-openapi-docs@workspace:plugins/docusaurus-plugin-openapi-docs"
+  dependencies:
+    "@apidevtools/json-schema-ref-parser": "npm:^9.0.9"
+    "@docusaurus/mdx-loader": "npm:>=2.0.1 <2.3.0"
+    "@docusaurus/module-type-aliases": "npm:>=2.0.1 <2.3.0"
+    "@docusaurus/plugin-content-docs": "npm:>=2.0.1 <2.3.0"
+    "@docusaurus/types": "npm:>=2.0.1 <2.3.0"
+    "@docusaurus/utils": "npm:>=2.0.1 <2.3.0"
+    "@docusaurus/utils-validation": "npm:>=2.0.1 <2.3.0"
+    "@paloaltonetworks/openapi-to-postmanv2": "npm:3.1.0-hotfix.1"
+    "@paloaltonetworks/postman-collection": "npm:^4.1.0"
+    "@redocly/openapi-core": "npm:^1.0.0-beta.103"
+    "@types/fs-extra": "npm:^9.0.13"
+    "@types/js-yaml": "npm:^4.0.5"
+    "@types/json-pointer": "npm:^1.0.31"
+    "@types/json-schema": "npm:^7.0.9"
+    "@types/lodash": "npm:^4.14.176"
+    "@types/mustache": "npm:^4.1.2"
+    chalk: "npm:^4.1.2"
+    clsx: "npm:^1.1.1"
+    fs-extra: "npm:^9.0.1"
+    js-yaml: "npm:^4.1.0"
+    json-pointer: "npm:^0.6.2"
+    json-refs: "npm:^3.0.15"
+    json-schema-merge-allof: "npm:^0.8.1"
+    lodash: "npm:^4.17.20"
+    mustache: "npm:^4.2.0"
+    slugify: "npm:^1.6.5"
+    swagger2openapi: "npm:^7.0.8"
+    url-template: "npm:^3.0.0"
+    utility-types: "npm:^3.10.0"
+    webpack: "npm:^5.61.0"
+    xml-formatter: "npm:^2.6.1"
+  peerDependencies:
+    react: ^16.8.4 || ^17.0.0
+  languageName: unknown
+  linkType: soft
 
 "docusaurus-theme-mdx-v2@npm:^0.1.2":
   version: 0.1.2
@@ -10258,7 +10335,6 @@ __metadata:
     "@types/eslint": "npm:^8"
     autoprefixer: "npm:^10.4.13"
     clsx: "npm:^1.1.1"
-    docusaurus-plugin-openapi-docs: "npm:^1.5.2"
     docusaurus-theme-mdx-v2: "npm:^0.1.2"
     docusaurus-theme-openapi-docs: "npm:^1.5.2"
     eslint: "npm:^8.36.0"
