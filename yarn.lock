@@ -1774,7 +1774,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/core@npm:2.2.0, @docusaurus/core@npm:^2.0.1":
+"@docusaurus/core@npm:2.2.0":
   version: 2.2.0
   resolution: "@docusaurus/core@npm:2.2.0"
   dependencies:
@@ -1870,15 +1870,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/eslint-plugin@npm:^2.3.1":
-  version: 2.3.1
-  resolution: "@docusaurus/eslint-plugin@npm:2.3.1"
+"@docusaurus/eslint-plugin@npm:2.2.0":
+  version: 2.2.0
+  resolution: "@docusaurus/eslint-plugin@npm:2.2.0"
   dependencies:
     "@typescript-eslint/utils": "npm:^5.30.5"
     tslib: "npm:^2.4.0"
   peerDependencies:
     eslint: ">=6"
-  checksum: d512efc0f8f8c1104b50e532c250f549d64fd843828485be5e73b2461981d9cfc88483d5b6094bb614838a940fc284f7b078013b1d7c82b8a06265917b91ccd1
+  checksum: 1be8184c75b1de775c8d4cc1cb2eebc4e45a0edbd419ea64772ecf1c8f006ba89d2a42c80ff5e49b4dba0e1f64c6c36b32b2eae1fbcccc67d6e4081787b320e6
   languageName: node
   linkType: hard
 
@@ -1946,25 +1946,6 @@ __metadata:
     react: "*"
     react-dom: "*"
   checksum: 4e493cbcf2abdd7da37b6e6d3121930bb94cc1c3b966e0816ac9f521e863b6c9f651967fb88b8eea0ac2e443b4bf74fd04663c21d06f1f99cf4ec666358e0d55
-  languageName: node
-  linkType: hard
-
-"@docusaurus/module-type-aliases@npm:^2.3.1":
-  version: 2.3.1
-  resolution: "@docusaurus/module-type-aliases@npm:2.3.1"
-  dependencies:
-    "@docusaurus/react-loadable": "npm:5.5.2"
-    "@docusaurus/types": "npm:2.3.1"
-    "@types/history": "npm:^4.7.11"
-    "@types/react": "npm:*"
-    "@types/react-router-config": "npm:*"
-    "@types/react-router-dom": "npm:*"
-    react-helmet-async: "npm:*"
-    react-loadable: "npm:@docusaurus/react-loadable@5.5.2"
-  peerDependencies:
-    react: "*"
-    react-dom: "*"
-  checksum: 25766a7d2c8bce360dfd05978780c284e7a52e3c2f625477e123200d527f192ad6df6e354a81a5c2bd367e1dcf7ed1e9646f84e05323828a5fbe4b5773d2d2f3
   languageName: node
   linkType: hard
 
@@ -2108,7 +2089,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/preset-classic@npm:^2.0.1":
+"@docusaurus/preset-classic@npm:2.2.0":
   version: 2.2.0
   resolution: "@docusaurus/preset-classic@npm:2.2.0"
   dependencies:
@@ -2257,25 +2238,6 @@ __metadata:
     react: ^16.8.4 || ^17.0.0
     react-dom: ^16.8.4 || ^17.0.0
   checksum: ab48acaf3f8fb702e0b5abb6b748ff064d10d2e9bc5e0315e7a21b55b4eb9fb872d366efab3f512200ea31efa18134e7af82220d1336a9eacc76fd352e31e220
-  languageName: node
-  linkType: hard
-
-"@docusaurus/types@npm:2.3.1":
-  version: 2.3.1
-  resolution: "@docusaurus/types@npm:2.3.1"
-  dependencies:
-    "@types/history": "npm:^4.7.11"
-    "@types/react": "npm:*"
-    commander: "npm:^5.1.0"
-    joi: "npm:^17.6.0"
-    react-helmet-async: "npm:^1.3.0"
-    utility-types: "npm:^3.10.0"
-    webpack: "npm:^5.73.0"
-    webpack-merge: "npm:^5.8.0"
-  peerDependencies:
-    react: ^16.8.4 || ^17.0.0
-    react-dom: ^16.8.4 || ^17.0.0
-  checksum: 6ff1d4b87366f5e47ad127e81a6a71573934b2d5322b9e0f08953cc547eb665006916415424b37728e96f891c1ec8c0d507bcc1d7f5bcfa805ec70e3184f7e35
   languageName: node
   linkType: hard
 
@@ -10326,10 +10288,10 @@ __metadata:
   resolution: "openapi-docusaurus@workspace:."
   dependencies:
     "@code-hike/mdx": "npm:^0.8.0"
-    "@docusaurus/core": "npm:^2.0.1"
-    "@docusaurus/eslint-plugin": "npm:^2.3.1"
-    "@docusaurus/module-type-aliases": "npm:^2.3.1"
-    "@docusaurus/preset-classic": "npm:^2.0.1"
+    "@docusaurus/core": "npm:2.2.0"
+    "@docusaurus/eslint-plugin": "npm:2.2.0"
+    "@docusaurus/module-type-aliases": "npm:2.2.0"
+    "@docusaurus/preset-classic": "npm:2.2.0"
     "@mdx-js/react": "npm:2"
     "@tsconfig/docusaurus": "npm:^1.0.6"
     "@types/eslint": "npm:^8"
