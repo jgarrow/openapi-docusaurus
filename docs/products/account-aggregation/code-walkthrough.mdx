@@ -27,11 +27,11 @@ const testFn = () => {
 
 We recommend that you include a unique `id` of your choice with the request. You may also include `metadata`, such as the date the `user` was created or the end user's name. Don't include any sensitive information here, such as credentials.
 
-:::info
+<Admonition type="info">
 
 None of these parameters are required, but the `user` object cannot be empty. We recommend that partners always set the `id` parameter when creating a user.
 
-:::
+</Admonition>
 
 In the response, the API gives each new `user` an MX-defined guid (or `user_guid` when appearing outside the `user` object). Between your `id` and the `guid`, you can map between your system and ours. You'll need the user `guid` for nearly every request on the MX API, at least when using basic authorization.
 
@@ -56,11 +56,11 @@ curl -i -X POST 'https://int-api.mx.com/users' \
 
 Make a POST request to the `widget_urls` endpoint using the guid.
 
-:::info
+<Admonition type="info">
 
 Ensure that the mode is set to aggregation.
 
-:::
+</Admonition>
 
 ```bash title=Endpoint:
 POST /users/{user_guid}/widget_urls

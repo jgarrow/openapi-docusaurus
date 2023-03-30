@@ -30,11 +30,11 @@ Background aggregation is also disabled for members created when using the Conne
 
 If an end user is present, you can choose to manually run a foreground aggregation. End users must be present during foreground aggregations because they may run into MFA, credential update requests, terms and conditions agreements, or other situations requiring end-user input. Just keep in mind that you cannot run a new aggregation within three hours of a successful aggregation, whether foreground or background. Thus, attention must be paid to the `aggregated_at` and `successfully_aggregated_at` member fields while you're developing your product with the Platform API.
 
-:::caution
+<Admonition type="caution">
 
 Both foreground and background aggregation may be prevented by disabling a `user`. A `user` must be re-enabled before any aggregation can be attempted. We may suspend background aggregation on a particular `member` in some circumstances, such as when several consecutive aggregation attempts fail. However, you can always attempt a foreground aggregation on a suspended `member`.
 
-:::
+</Admonition>
 
 ---
 

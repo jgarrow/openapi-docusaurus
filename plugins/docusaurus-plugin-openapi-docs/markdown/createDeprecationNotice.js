@@ -9,7 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.createDeprecationNotice = void 0;
 const utils_1 = require("./utils");
 function createAdmonition({ children }) {
-    return `:::caution deprecated\n\n${(0, utils_1.render)(children)}\n\n:::`;
+    return `<Admonition type="caution"> deprecated\n\n${(0, utils_1.render)(children)}\n\n</Admonition>`;
 }
 function createDeprecationNotice({ deprecated, description, }) {
     return (0, utils_1.guard)(deprecated, () => createAdmonition({
