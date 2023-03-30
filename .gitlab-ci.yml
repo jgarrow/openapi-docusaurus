@@ -1,0 +1,6 @@
+validate_oas:
+  script:
+    - npx @redocly/cli lint https://raw.githubusercontent.com/mxenabled/openapi/master/openapi/mx_platform_api.yml
+  stage: test
+  tags:
+    - docker
