@@ -1,0 +1,46 @@
+---
+sidebar_position: 1
+sidebar_label: Introduction
+---
+
+import TANs from '/docs/partials/_tokenized_account_numbers.mdx';
+
+# Introduction to Account and Routing Numbers
+
+MX's Instant Account Verification (IAV) feature allows partners to access account and routing numbers. When used in combination with Account Owner Verification (AOV) and Balance Checks, account numbers can be used for a number of purposes, such as money movement through the ACH system and fraud reduction.
+
+This guide will take you through the process of getting this information using the Connect Widget or purely through API endpoints. After reading this guide you'll be able to:
+
+* Gather and read account and routing numbers to use for things like ACH transfers.
+* Gather and read account owner information like name, address and phone number to confirm the owner matches the information given by the end user.
+* Gather and read balance information to check that there is sufficient balance for your purposes.
+* Read account details to check the available balance and confirm accounts are still open.
+* Use best practices to avoid problems like ACH returns.
+
+The processes described in this guide are very similar to standard account/transaction aggregation. You'll benefit by reading our comprehensive [aggregation guide](/aggregation/guides/introduction) as well, which covers things like multifactor authentication.
+
+Some important things to keep in mind:
+
+* All endpoints in this guide are part of MX Platform API and you'll need to follow its requirements. For important information on errors, standards and conventions, and the overall resource structure of the MX Platform API, please see our [API reference](/api).
+* IAV applies only to demand deposit accounts. Functionally, this means that only `CHECKING` and `SAVINGS` accounts are likely to return account/routing numbers.
+* If one of the aggregation-type processes described in this guide (IAV, AOV, balance check) is already running when you start the same process, a `202 Accepted` status will be returned. If another aggregation-type process is already running — like standard aggregation or extended transaction history — a `409 Conflict` will be returned.
+
+# Connect Widget Workflow
+
+You'll use this workflow with the Connect Widget.
+
+1. Create a `user`.
+1. Load the Connect Widget in verification mode for that user.
+    * The end user will use the Connect Widget to create a member, start a verification job, and answer multi-factor authentication if necessary.
+    * If your use case requires account owner information in addition to account and routing numbers, you can use the `include_identity` parameter to gather this information as well.
+1. The end user interacts with the Connect Widget.
+    * Listen for and handle event messages; the Connect Widget will deliver the member connected event message if successful.
+    * Polling the member status helps deal with cases where the Connect Widget is closed early or unexpectedly; a verification is successful when the member `connection_status` is `CONNECTED` and the `is_aggregating` field changes from `true` to `false`.
+1. Read the account numbers.
+1. Read the account owner information, if you used `include_identity`.
+1. Read the account's details to confirm it is open and has sufficient funds.
+1. Before future uses of the account number, run a balance check.
+
+# Dealing with Tokenized Account Numbers
+
+<TANs />

@@ -1,0 +1,10 @@
+OAuth connections for the Chase institution do not return end users' actual account numbers for deposit accounts. Instead, they return a Tokenized Account Number (TAN) and an associated routing number (ABA). The TAN will not have any similarity to the actual account number; the ABA returned will be a valid, but will not be the one associated with the real account number. In other words, the `account_number` field returned from `/users/{user_guid}/members/{member_guid}/account_numbers` will be a TAN for Chase OAuth connections.
+
+The TAN and associated ABA returned through the verification endpoint are valid for money movement on the ACH system, but **only when used together**; for instance, using the TAN with a different ABA also associated with the institution will not work for money movement. Nevertheless, these numbers **will not match** end users' actual account numbers for verification purposes.
+
+Don't display the TAN returned for OAuth connections to end users. They may not recognize it. Instead, display the masked account number returned by the `/users/{user_guid}/accounts/{account_number}` endpoint to the end user, but use the TAN for ACH transfers.
+
+While Chase is currently the only institution on the MX platform which returns TANs, other institutions may do so in the future. So it is best practice to treat **all** account and routing numbers returned for OAuth connections as though they were a TAN.
+
+Non-OAuth connections will return real account and routing numbers.
+

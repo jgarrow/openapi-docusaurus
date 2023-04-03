@@ -1,0 +1,108 @@
+---
+sidebar_position: 2
+sidebar_label: Account/Routing Numbers with the Connect Widget
+---
+
+import CreateUser from '/docs/partials/platform_api/_create_a_user.mdx';
+import RequestConnect from '/docs/partials/platform_api/request/_connect_widget_verification_mode.mdx';
+import RquestConnectResponse from '/docs/partials/platform_api/response/_connect_widget_verification_mode.mdx';
+import CheckStatus from '/docs/partials/platform_api/request/_check_member_status.mdx';
+import CheckStatusRsponse from '/docs/partials/platform_api/response/_check_member_status.mdx';
+import ListAccountNumbers from '/docs/partials/platform_api/request/_list_account_numbers.mdx';
+import ListAccountNumbersResponse from '/docs/partials/platform_api/response/_list_account_numbers.mdx';
+import ListAccountOwners from '/docs/partials/platform_api/request/_list_account_owners.mdx';
+import ListAccountOwnersResponse from '/docs/partials/platform_api/response/_list_account_owners.mdx';
+import ReadAccount from '/docs/partials/platform_api/request/_read_account.mdx';
+import ReadAccountResponse from '/docs/partials/platform_api/response/_read_account.mdx';
+
+# Step-by-step Guide for Account Numbers using the Connect Widget
+
+## About the Connect Widget
+
+The Connect Widget is our embeddable user interface that simplifies verification and other aggregation-type processes for end users and you, our partners. It takes care of searching for institutions, gathering credentials, creating and connecting members, MFA, and common errors.
+
+For more about the Connect Widget, see our [technical reference](/api#connect_the_connect_widget) and [developer guide](/connect/guides/introduction).
+
+## 1. Create a User
+
+<CreateUser />
+
+## 2. Load the Connect Widget in Verification Mode, Optionally use `include_identity`
+
+Next, you'll want to load an instance of the Connect Widget by first requesting a URL with the unique user GUID returned in the last request, then loading it in either a browser or app environment.
+
+### 2.1 Request a URL
+
+Set the `mode` parameter to `verification` and the `widget_type` parameter to `connect_widget`, as shown in the following example. Please see our [API reference](/api#connect_configuring_connect_verification_mode) for complete information on the behaviors and settings affected by verification mode.
+
+If your use case requires access to account owner information like name and address, you can [use the `include_identity` parameter](/api#connect_configuring_connect_include_identity). This will tell the Connect Widget to run an account owner aggregation after IAV has completed.
+
+Setting the mode to `verification` limits Connect Widget search results to institutions that support IAV. Setting `include_identity` further limits search results to institutions that support both IAV and account owner aggregation.
+
+<Admonition type="info">
+  Widget URLs are one-time use. You must fetch a new widget URL each time you load the widget.
+</Admonition>
+
+<RequestConnect />
+<RquestConnectResponse />
+
+### 2.2 Load the URL in an Embedded Environment
+
+Loading the Connect Widget URL properly depends on whether it is in a [browser](/connect/guides/sdk) or an [app](/connect/guides/mobile), along with a number of other factors.
+
+## 3. End Users Interact with the Connect Widget
+
+The Connect Widget handles the creation of a `member` as well as the IAV process. It automatically asks end users to search for an institution, give their credentials, and determine which account they'd like to verify. It handles all multifactor authentication, and there may be multiple rounds of MFA. It also deals with any errors along the way.
+
+You'll need to listen for a couple important event messages from the Connect Widget:
+
+* [member status updated](/api#connect_postmessage_events_member_status_update) which gives you the member GUID and the current `connection_status`.
+* [member connected](/api#connect_postmessage_events_member_connected) tells you that the member has been successfully connected and you can move on to the next steps.
+  * If you're using `include_identity` (which means running an IAV, then an owner aggregation), the member connected event message will not fire until after **both** processes are complete — that is, after the owner aggregation is done.
+
+Alternatively, if the end user closes the Connect Widget early or some other problem occurs before you see a `CONNECTED` status, you can simply use the `member_guid` to immediately [check the member's connection status via the API](/api#core_resources_members_read_member_status).
+
+<CheckStatus />
+<CheckStatusRsponse />
+
+## 4. List the Account Numbers
+
+The IAV job is now complete and you can list account and routing numbers. The MX Platform API has two endpoints for this: [list account numbers by member](/api#verification_mx_widgets_list_account_numbers_by_member) and [list account numbers by account](/api#verification_mx_widgets_list_account_numbers_by_account). We show the first here.
+
+<Admonition type="warning">
+If MX has both an account number and a routing number for at least one of the member's accounts, that information will be returned. No information will be returned for accounts that are missing a value for one or both of these fields.
+</Admonition>
+
+<ListAccountNumbers />
+<ListAccountNumbersResponse />
+
+## 5. List Account Owners if using `include_identity`
+
+If you gathered account owner information when you loaded the Connect Widget (set `include_identity: true` in step 2.1) you'll need to read this owner information. Confirming that the returned account owner information matches the information provided by the end user can help [prevent ACH returns](/verification/guides/best_practices#ach_r03).
+
+Make a GET request to `/users/{user_guid}/members/{member_guid}/account_owners`.
+
+<ListAccountOwners />
+<ListAccountOwnersResponse />
+
+## 6. Read the Account Details
+
+Before using the account numbers you've just gathered for things like ACH transfers, you'll need to [read the account's details](/api#core_resources_accounts_read_account) to confirm that:
+
+* The `available_balance` shows sufficient funds.
+* The account is still open: `is_closed: false`.
+
+This helps [prevent ACH returns](/verification/guides/best_practices).
+
+<ReadAccount />
+<ReadAccountResponse />
+
+## 7. Check The Balance Before Future Uses of Account/Routing Numbers
+
+Account and routing numbers can be used for things like ACH transfers for as long as the account is still open, and there is generally no need to run another IAV for the account.
+
+However, information about the available balance in that account will go stale within a few hours. Therefore, before using these numbers again in the future (or if you wait a while to use them after the initial IAV) you'll need to run a [balance check](/api#core_resources_members_check_balances) to get the latest `available_balance`. This will prevent [errors related to insufficient funds or closed accounts](/verification/guides/best_practices).
+
+### 7.1 Call the Check Balance Endpoint
+
+

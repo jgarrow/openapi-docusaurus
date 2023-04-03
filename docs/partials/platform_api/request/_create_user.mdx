@@ -1,0 +1,14 @@
+```bash Request
+curl -i -X POST 'https://int-api.mx.com/users' \
+-u 'client_id:api_key' \
+-H 'Accept: application/vnd.mx.api.v1+json' \
+-H 'Content-Type: application/json' \
+-d '{
+      "user": {
+        "id": "partner-2345",
+        "is_disabled": false,
+        "email": "totally.fake.email@notreal.com",
+        "metadata": "Yada yada yada"
+      }
+    }'
+```
