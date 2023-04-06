@@ -1,0 +1,32 @@
+---
+sidebar_position: 1
+sidebar_label: Balance Checks Overview
+---
+
+# Balance Checks Overview
+
+## What are Balance Checks?
+
+The Platform API’s balance check feature enables you to get real-time account balance information. This means the up-to-date balance information as it would appear on digital banking website, for instance. This can be critical to the success of any number of use cases including payments and account origination. Balance checks differ from standard aggregation because no transaction data is gathered, only account information.
+
+This guide will take you through the balance check process using API endpoints. After reading this guide, you’ll be able to:
+
+* Gather balance information.
+* Read balance information.
+
+## API Workflow
+
+<Admonition type="info">
+In the great majority of use cases, balance checks are performed for already existing users and members as part of a larger process such as moving money or originating a new held account. To avoid confusion and unnecessary work, the steps in this guide assume these already exist. If your test or use case requires it, you may need to first create a user and a member.
+</Admonition>
+
+The workflow for performing a balance check is as follows:
+
+1. Start the balance check process.
+1. Poll the member’s connection status.
+1. Answer multifactor authentication, if necessary.
+1. Poll the member’s connection status again until it reaches an end state.
+    * A successful end state is when the connection_status is CONNECTED and the is_aggregating field changes from true to false.
+1. List the member’s account information or read a particular account’s information.
+
+

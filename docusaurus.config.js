@@ -91,14 +91,14 @@ const config = {
                 to: "/products/account-aggregation",
                 label: "Account Aggregation",
               },
-              // {
-              //   to: "/extended-transaction-history",
-              //   label: "Extended Transaction History"
-              // },
-              // {
-              //   to: "/instant-account-verification",
-              //   label: "Instant Account Verification"
-              // },
+              {
+                to: "/products/balance_checks",
+                label: "Balance Check"
+              },
+              {
+                to: "/products/account_numbers",
+                label: "Instant Account Verification"
+              },
               // {
               //   to: "/account-owner-verification",
               //   label: "Account Owner Verification"

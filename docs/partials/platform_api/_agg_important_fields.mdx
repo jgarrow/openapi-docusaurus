@@ -1,0 +1,29 @@
+There are multiple fields on each `member` that help you determine what state the {props.job_type} job is in and how to resolve that state into a successful aggregation — as well as when resolution is not possible. These all need to be weighed together to make the {props.job_type} job successful.
+
+| Field Name                   | Data Type | Description |
+| ---------------------------- | ----------| ------------|
+| `aggregated_at`              | String    | The date and time at which the last aggregation-type job for the `member` was initiated. |
+| `connection_status`          | String    | This field indicates the state of a member's aggregation-type job,  provided as a string. See [member connection statuses](xxx) for more information on possible values. |
+| `is_being_aggregated`        | Boolean   | This field will be true if an aggregation-type job is running at the time of the request. Otherwise, this field will be false. |
+| `successfully_aggregated_at` | String    | The date and time the last aggregation-type job completed successfully. |
+
+## `connection_status`
+
+The `connection_status` field indicates the current state of an aggregation. For instance:
+* `CREATED` means the member has just been created.
+* `CHALLENGED` means the {props.job_type} job has run into MFA.
+* `FAILED` means the {props.job_type} job was unsuccessful.
+
+The connection statuses `CREATED`, `UPDATED`, `DELAYED`, and `RESUMED` represent transient states for different points in the {props.job_type} process and generally do not require a specific action or end-user input. They may, however, require you to keep making _read_ requests on the member until an actionable status or an end state shows up.
+
+The connection statuses `PREVENTED`, `DENIED`, `IMPEDED`, `IMPAIRED`, `REJECTED`, `EXPIRED`, `LOCKED`, `IMPORTED`, `DISABLED`, `DISCONTINUED`, and `CLOSED` represent end states that require a new {props.job_type} job, and possibly end-user input, for future success.
+
+For exact definitions and next steps for each of the 21 connection statuses visit the [API Reference](xxx).
+
+## `is_being_aggregated`
+
+The `is_being_aggregated` indicates whether the {props.job_type} process is currently taking place on the MX platform.
+
+The `connection_status` and `is_being_aggregated` fields should be used in conjunction with several other `member` fields to determine future actions. These include `aggregated_at`, `successfully_aggregated_at`, and `is_authenticated`.
+
+For example, when the `connection_status` is `CONNECTED` and the `is_being_aggregated` field is `false`, this means the latest {props.job_type} attempt has finished and the gathered data can be read. You can use the field `successfully_aggregated_at` to determine when the last successful {props.job_type} job occurred.

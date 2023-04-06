@@ -1,0 +1,16 @@
+```bash Request
+curl -i -X PUT 'https://int-api.mx.com/users/USR-11141024-90b3-1bce-cac9-c06ced52ab4c/members/MBR-84ca0882-ad6c-4f10-817f-c8c0de7424fa/resume' \
+-u 'client_id:api_key' \
+-H 'Accept: application/vnd.mx.api.v1+json' \
+-H 'Content-Type: application/json' \
+-d '{
+      "member": {
+        "challenges": [
+          {
+            "guid": "CRD-8f841084-66cb-4e3d-9253-96f97093100a",
+            "value": "correct"
+          }
+        ]
+      }
+    }'
+```

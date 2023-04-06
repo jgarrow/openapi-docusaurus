@@ -1,0 +1,64 @@
+---
+sidebar_position: 2
+sidebar_label: Balance Checks Step-By-Step
+---
+
+import CheckBalance from '/docs/partials/platform_api/request/_check_balance.mdx';
+import CheckBalanceResponse from '/docs/partials/platform_api/response/_check_balance.mdx';
+import CheckMemberStatus from '/docs/partials/platform_api/request/_check_member_status.mdx';
+import CheckMemberStatusResponse from '/docs/partials/platform_api/response/_check_member_status.mdx';
+import ReadAccount from '/docs/partials/platform_api/request/_read_account.mdx';
+import ReadAccountResponse from '/docs/partials/platform_api/response/_read_account.mdx';
+
+# Balance Checks Step-By-Step
+
+## Before You Begin
+
+<Admonition type="info">
+In the great majority of use cases, balance checks are performed for already existing users and members as part of a larger process such as moving money or originating a new held account. To avoid confusion and unnecessary work, the steps in this guide assume these already exist. If your test or use case requires it, you may need to first create a user and a member.
+</Admonition>
+
+## 1. Call the Check Balance Endpoint
+
+To make this request, you'll need an existing `user_guid` and `member_guid` as stated above.
+
+Make a POST request to `/users/{user_guid}/members/{member_guid}/check_balance`. This request only starts the balance aggregation process; actually reading the aggregated data comes late. The response will be a `member` object with information about the state of the balance check process that just started.
+
+<CheckBalance />
+<CheckBalanceResponse />
+
+## 2. Check the Connection Status
+
+Check the connection status of the member to get information on the state of the balance job. Important fields include `connection_status`, `is_being_aggregated`, and `successfully_aggregated_at`. The `is_being_aggregated` field will tell you whether balance job is ongoing or complete. When you see `connection_status: CONNECTED` and `is_being_aggregated: false` at the same time, the balance job is done and you can move on to the next step. The `successfully_aggregated_at` field will give the exact time the job completed successfully, but of course will not update if the balance job fails.
+
+You may need to check the connection status several times until an end state is reached.
+
+Make a GET request to the `/users/{user_guid}/members/{member_guid}/status` endpoint. The response below shows a successful end state.
+
+<CheckMemberStatus />
+<CheckMemberStatusResponse />
+
+## 3. Deal with Multifactor Authentication
+
+Balance checks may trigger multifactor authentication (MFA) from the institution associated with the member. This is indicated by `connection_status: CHALLENGED`.
+
+Please see the detailed section on [answering MFA challenges](/products/balance_checks/dealing_with_mfa) for more information. For this part of the guide, we'll assume there was no MFA and move on to the next step.
+
+## 4. Read the account's balance
+
+The balance job was successful and you can now read balance information. This is given by the `balance` and `available_balance` fields on the account object.
+
+Make a `GET` request to the `/users/{user_guid}/members/{member_guid}/accounts/{account_guid}` endpoint. The response will include all the attributes of the specified account.
+
+<ReadAccount />
+<ReadAccountResponse />
+
+<Admonition>
+There is another endpoint for reading an account provided for code convenience: `GET /users/{user_guid}/accounts/{account_guid}`.
+
+You may also consider listing the details for all accounts associated with a user or a member:
+
+`GET /users/{user_guid}/accounts`
+
+`GET /users/{user_guid}/members/{member_guid}/accounts`
+</Admonition>

@@ -1,0 +1,35 @@
+import ChallengedResponse from '/docs/partials/platform_api/response/_challenged_response.mdx';
+import Resume from '/docs/partials/platform_api/request/_resume.mdx';
+import ResumeResponse from '/docs/partials/platform_api/response/_resume.mdx';
+
+This guide explains how to deal with multifactor authentication (MFA) while running an aggregation-type job. If you've been prompted for MFA, you've completed the following steps already:
+
+1. Called the aggregate member endpoint.
+1. Checked the member's connection status: `GET /users/{user_guid}/members/{member_guid}/status`.
+
+MFA is indicated when you see a `connection_status` of `CHALLENGED`. You'll also see an array returned in this response called `challenges` which includes the specific question or questions the end user will need to answer to proceed.
+
+Make a note of both the `guid` in the challenges array and the `label`, in this case, `What city were you born in?`.
+
+Here is an example:
+
+<ChallengedResponse />
+
+## Use the Resume Endpoint
+
+The `POST /users/{user_guid}/members/{member_guid}/resume` endpoint allows you to answer the challenges presented during MFA and continue the {props.job_type} process. There are also other forms of MFA, such as choosing from multiple options (like choosing from a list of phone numbers to text a code to) or choosing the correct pre-determined photo. These are not covered in this guide, but they are possible scenarios with the MX API.
+
+A relatively common scenario is requiring a one-time code texted to a phone number. In this case, use the resume endpoint twice: once to choose the phone number and again to provide the correct code. Also, use the connection status endpoint multiple times to get two different challenge GUIDs: one for the phone number and one for the code.
+
+<Admonition>
+ In this guide, we're using MX Bank test institution. To mimic a successful answer, use `correct` as the value.
+
+In an actual MFA situation, the end user will need to provide the correct answer to the question. If the security question is `What city were you born in?`, the answer may be `Chicago`, `Tallahassee`, etc.
+</Admonition>
+
+In the body of the request, include the challenge `guid` provided in the previous response and the correct answer to the question given in the `label` field of the last response.
+
+Notice that `connection_status` has changed to `RESUMED` and `is_being_aggregated` is still `true`. However, the `is_authenticated` field is still `false`. This indicates that the MFA answer provided was correct and the {props.job_type} job is proceeding, but the member's login credentials have not yet been authenticated. Keep checking the status to make sure there are no more challenges or errors.
+
+<Resume />
+<ResumeResponse />
