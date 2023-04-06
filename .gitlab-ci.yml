@@ -1,6 +1,67 @@
+image: node:latest
+
+stages:
+  - test
+  - deploy
+
 validate_oas:
   script:
-    - npx @redocly/cli lint https://raw.githubusercontent.com/mxenabled/openapi/master/openapi/mx_platform_api.yml
+    - echo 'Validating OpenAPI spec...'
+    - npx @redocly/cli lint src/openapi/mx_platform_api.yml
   stage: test
   tags:
     - docker
+
+test:
+  stage: test
+  before_script:
+    - apt-get update && apt-get install -y yarn=4.0.0-rc.39-1
+  script:
+    - yarn build
+  rules:
+    - if: $CI_COMMIT_REF_NAME != $CI_DEFAULT_BRANCH
+
+pages:
+  stage: deploy
+  before_script:
+    - yarn install
+  script:
+    - echo 'Creating pages...'
+    - yarn build
+    - echo 'Deploying to GitLab pages...'
+    - mv ./build ../public
+  artifacts:
+    paths:
+    - public
+  rules:
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
+
+
+deploy:
+  # Define the variables that the job needs
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+  # Define the stages that the job will run in
+  stages:
+    - build
+    - deploy
+  # Define the commands that the job will run
+  before_script:
+    - apt-get update && apt-get install -y yarn=4.0.0-rc.39-1
+  script:
+    - yarn build
+  # Define the deployment stage
+  deploy:
+    # Define the environment that the deployment is for
+    environment: pages
+    # Define the script that will deploy the site to GitLab pages
+    script:
+      - echo 'Deploying to GitLab pages...'
+      - cp -r ./build/* ./public/
+    # Define the artifacts that the job will produce
+    artifacts:
+      paths:
+        - public
+  # Define the rules that the job must follow in order to run
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
