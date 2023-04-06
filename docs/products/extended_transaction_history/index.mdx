@@ -1,0 +1,81 @@
+---
+sidebar_position: 1
+sidebar_label: Extended Transaction History
+---
+
+import AccountData from '/docs/partials/platform_api/response/_read_account.mdx';
+import Diagram from '/static/img/extended_transaction_landing_diagram.png';
+import TransactionData from '/docs/partials/platform_api/response/_read_transaction.mdx';
+import { UseCase } from "@site/src/components/UseCase"
+
+# Extended Transaction History
+
+> _Get up to 24 months of account and transaction data_
+
+With Extended Transaction History, you can connect to an end user’s financial institution and retrieve up to 24 months data for their accounts and transactions. Standard account aggregation provides only 90 days.
+
+You can use this data for any number of solutions such as personal financial management or risk analysis. Data is available for accounts ranging from checking and savings to mortgages and credit cards — and everything in between. We cleanse this data to make it understandable to end users, and we automatically put it into more than 100 predefined categories. We also add enhanced information such as which merchant was involved in a transaction and whether it represents a direct deposit, bill pay, or subscription.
+
+<img src={Diagram} />
+
+# Quick Links
+
+* [API reference](xxx)
+
+# Account Data
+
+This sample response shows the kinds of account data you can expect to get for financial accounts when using Extended Transaction History.
+
+<AccountData />
+
+# Transaction Data
+
+This sample response shows the kinds of transaction data you can expect to get for financial accounts when using Extended Transaction History.
+
+<TransactionData />
+
+# Related Products
+
+* [Instant Account Verification](xxx)
+* [Account Aggregation](xxx)
+* [Statements](xxx)
+
+# Use Cases
+
+export function UseCaseSection({children}) {
+  return <div className="mt-6 mb-[60px] grid grid-cols-2 auto-rows-max gap-6">{children}</div>
+}
+
+<UseCaseSection>
+
+  <UseCase
+    slug="/use-cases/payments"
+    title="Personal Financial Management"
+    Svg={require("@site/static/img/money-hand.svg").default}
+  >
+    Help end users manage their money.
+  </UseCase>
+  <UseCase
+    slug="/use-cases/payments"
+    title="Financial Wellness"
+    Svg={require("@site/static/img/money-hand.svg").default}
+  >
+    Help end users improve their finances.
+  </UseCase>
+  <UseCase
+    slug="/use-cases/payments"
+    title="Risk Reduction"
+    Svg={require("@site/static/img/magnifying-glass.svg").default}
+  >
+    Prevent returns and other costly errors.
+  </UseCase>
+  <UseCase
+    slug="/use-cases/payments"
+    title="Enhance Your Online Banking Experience"
+    Svg={require("@site/static/img/mountains.svg").default}
+  >
+    Add more value to your online banking portal.
+  </UseCase>
+
+</UseCaseSection>
+

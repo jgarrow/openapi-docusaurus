@@ -94,12 +94,12 @@ const config = {
               },
               {
                 to: "/products/balance_checks",
-                label: "Balance Check"
+                label: "Balance Check",
               },
-              // {
-              //   to: "/account-owner-verification",
-              //   label: "Account Owner Verification"
-              // },
+              {
+                to: "/products/extended_transaction_history",
+                label: "Extended Transaction History",
+              },
               // {
               //   to: "/microdeposits",
               //   label: "Microdeposits"
@@ -115,7 +115,7 @@ const config = {
             items: [
               {
                 to: "/use-cases/payments",
-                label: "Payments"
+                label: "Payments",
               },
             ],
           },
