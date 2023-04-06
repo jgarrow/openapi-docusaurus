@@ -1,32 +1,73 @@
 ---
 sidebar_position: 1
-sidebar_label: Balance Checks Overview
+sidebar_label: Balance Checks
 ---
 
-# Balance Checks Overview
+import { UseCase } from "@site/src/components/UseCase"
+import Diagram from '/static/img/balance_check_landing_diagram.png';
+import AccountData from '/docs/partials/platform_api/response/_read_account.mdx';
 
-## What are Balance Checks?
+# Balance Checks
 
-The Platform API’s balance check feature enables you to get real-time account balance information. This means the up-to-date balance information as it would appear on digital banking website, for instance. This can be critical to the success of any number of use cases including payments and account origination. Balance checks differ from standard aggregation because no transaction data is gathered, only account information.
+> _Get the available balance for an end user’s financial accounts_
 
-This guide will take you through the balance check process using API endpoints. After reading this guide, you’ll be able to:
+With Balance Checks you can connect to an end user’s financial institution and retrieve the available balance for an account, as well as a lot of other information about that account. Unlike Account Aggregation, this product does not pull in transaction data. This makes Balance Check perfect for use cases like money movement or account opening where such data is not needed.
 
-* Gather balance information.
-* Read balance information.
+<img src={Diagram} />
 
-## API Workflow
 
-<Admonition type="info">
-In the great majority of use cases, balance checks are performed for already existing users and members as part of a larger process such as moving money or originating a new held account. To avoid confusion and unnecessary work, the steps in this guide assume these already exist. If your test or use case requires it, you may need to first create a user and a member.
-</Admonition>
+# Quick Links
 
-The workflow for performing a balance check is as follows:
+* [API reference](xxx)
 
-1. Start the balance check process.
-1. Poll the member’s connection status.
-1. Answer multifactor authentication, if necessary.
-1. Poll the member’s connection status again until it reaches an end state.
-    * A successful end state is when the connection_status is CONNECTED and the is_aggregating field changes from true to false.
-1. List the member’s account information or read a particular account’s information.
+# Account Data
 
+This sample response shows the kinds of data you can expect to get for financial accounts when using Balance Check.
+
+<AccountData />
+
+# Related Products
+
+* [Account Owner Identification](xxx)
+* [Instant Account Verification](xxx)
+* [Account Aggregation](xxx)
+
+# Use Cases
+
+export function UseCaseSection({children}) {
+  return <div className="mt-6 mb-[60px] grid grid-cols-2 auto-rows-max gap-6">{children}</div>
+}
+
+<UseCaseSection>
+  
+  <UseCase 
+    slug="/use-cases/payments" 
+    title="Payment Procssing"
+    Svg={require("@site/static/img/money-hand.svg").default}
+  >
+    Move money using account and routing numbers.
+  </UseCase>
+  <UseCase 
+    slug="/use-cases/payments" 
+    title="Moving Money"
+    Svg={require("@site/static/img/money-hand.svg").default}
+  >
+    Process payments for end users.
+  </UseCase>
+  <UseCase 
+    slug="/use-cases/payments" 
+    title="Risk Reduction"
+    Svg={require("@site/static/img/magnifying-glass.svg").default}
+  >
+    Prevent returns and other costly errors.
+  </UseCase>
+  <UseCase 
+    slug="/use-cases/payments" 
+    title="Account origination"
+    Svg={require("@site/static/img/mountains.svg").default}
+  >
+    Get new customers.
+  </UseCase>
+
+</UseCaseSection>
 

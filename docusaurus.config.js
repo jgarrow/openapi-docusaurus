@@ -86,6 +86,7 @@ const config = {
             docId: "intro",
             position: "left",
             label: "Products",
+            to: "/products",
             items: [
               {
                 to: "/products/account-aggregation",
@@ -94,10 +95,6 @@ const config = {
               {
                 to: "/products/balance_checks",
                 label: "Balance Check"
-              },
-              {
-                to: "/products/account_numbers",
-                label: "Instant Account Verification"
               },
               // {
               //   to: "/account-owner-verification",
@@ -109,7 +106,19 @@ const config = {
               // },
             ],
           },
-          { to: "/use-cases", label: "Use cases", position: "left" },
+          {
+            type: "dropdown",
+            docId: "intro",
+            position: "left",
+            label: "Use Cases",
+            to: "/use-cases",
+            items: [
+              {
+                to: "/use-cases/payments",
+                label: "Payments"
+              },
+            ],
+          },
           {
             label: "API Reference",
             position: "left",
