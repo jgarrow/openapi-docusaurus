@@ -1,0 +1,13 @@
+import SearchInstitutions from '/docs/partials/platform_api/request/_search_institutions.mdx';
+import SearchInstitutionsResponse from '/docs/partials/platform_api/response/_search_institutions.mdx';
+
+To create a member, you need to know what financial `institution` the `member` should be connected to and what type of credentials the `institution` expects to get.
+
+First, search for an institution using query parameters on the list institutions endpoint, GET `/institutions?name={string}`.
+
+The example that follows searches for MX Bank, which is [MX's institution for testing and development](xxx).
+
+The response returns a paginated list of institutions that match the string you send in the `name` query parameter. Make a note of the `code` you find in the example response; you'll need this for the next step.
+
+<SearchInstitutions />
+<SearchInstitutionsResponse />

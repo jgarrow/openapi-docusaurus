@@ -1,0 +1,78 @@
+---
+sidebar_position: 3
+sidebar_label: ETH Step-By-Step
+---
+
+import CheckStatus from '/docs/partials/platform_api/_check_member_status.mdx';
+import CreateMember from '/docs/partials/platform_api/request/_create_member_extended.mdx';
+import CreateMemberResponse from '/docs/partials/platform_api/response/_create_member_extended.mdx';
+import CreateUser from '/docs/partials/platform_api/_create_a_user.mdx';
+import ExtendHistory from '/docs/partials/platform_api/request/_extend_history.mdx';
+import ExtendHistoryResponse from '/docs/partials/platform_api/response/_extend_history.mdx';
+import ReadAccount from '/docs/partials/platform_api/request/_read_account.mdx';
+import ReadAccountResponse from '/docs/partials/platform_api/response/_read_account.mdx';
+import RequiredCredentials from '/docs/partials/platform_api/_get_institution_required_credentials.mdx';
+import SearchInstitutions from '/docs/partials/platform_api/request/_search_institutions_extended.mdx';
+import SearchInstitutionsResponse from '/docs/partials/platform_api/response/_search_institutions_extended.mdx';
+
+# ETH Step-by-step
+
+## 1. Create a user
+
+<CreateUser />
+
+## 2. Search for an Institution
+
+To create a member, you need to know what financial institution the member should be connected to and what type of credentials the institution expects to get.
+
+First, search for an institution using query parameters on the list institutions endpoint, GET `/institutions?name={string}&supports_transaction_history=true`.
+
+The example searches for MX Bank, which is [MX's institution for testing and development](xxx). It also limits results to institutions that support ETH.
+
+The response returns a paginated list of institutions that match the string you send in the `name` query parameter. Make a note of the `code` you find in the example response; you'll need this for the next step.
+
+<SearchInstitutions />
+<SearchInstitutionsResponse />
+
+## 3. Get the Institution's Required Credentials
+
+<RequiredCredentials />
+
+## 4. Create a Member
+
+For this step, you need to have already gathered from the end user the values needed for each credential. The following example uses the MX Bank institution and therefore requires a username and a password; it sets the username to `mxuser` and the password to `password` which are the credentials for the test user for MX Bank.
+
+Make a POST request to the `/users/{user_guid}/members` endpoint. The response includes the newly created `member`.
+  * Put the `user_guid` in the path.
+  * In the body, include the credential GUIDs and their values in the `credentials` array.
+  * In the body, set the `skip_aggregation` parameter to `true`.
+    * A standard aggregation is kicked off automatically whenever a member is created unless you explicitly prevent it using `skip_aggregation`. Since you're about to perform an ETH job, there's no need a for a standard agg.
+  * In the body, set the `id` and `metadata` fields as you see fit. This is not required, but is strongly encouraged.
+  * Optionally, you can disable background aggregation with the `background_aggregation_is_disabled` parameter. It defaults to `false`. In other words, background aggregation is enabled by default.
+
+<Admonition type="warning">
+Do not add multiple members that connect to the same `institution` using the same `credentials` on the same `user`. This will result in a `409 Conflict` error.
+</Admonition>
+
+<CreateMember />
+<CreateMemberResponse />
+
+## 5. Start an ETH job
+
+Now we can actually begin the process of gathering up to 24 months of transaction data.
+
+Make a POST request to the `/users/{user_guid}/members/{member_guid}/extend_history` endpoint. This request only starts the ETH process; actually reading the aggregated data comes later. The response will be a `member` object with information about the state of the ETH process that just started.
+
+<ExtendHistory />
+<ExtendHistoryResponse />
+
+## 6. Check the Connection Status
+
+<CheckStatus job_type="ETH" />
+
+## 7. Deal with Multifactor Authentication
+
+Aggregation-type jobs such as ETH may trigger multifactor authentication (MFA) from the institution associated with the member. This is indicated by `connection_status: CHALLENGED`.
+
+Please see the detailed section on [answering MFA challenges](/products/balance_checks/dealing_with_mfa) for more information. For this part of the guide, we'll assume there was no MFA and move on to the next step.
+

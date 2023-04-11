@@ -1,0 +1,12 @@
+import CheckMemberStatus from '/docs/partials/platform_api/request/_check_member_status.mdx';
+import CheckMemberStatusResponse from '/docs/partials/platform_api/response/_check_member_status.mdx';
+
+Check the connection status of the member to get information on the state of the {props.job_type} job. Important fields include `connection_status`, `is_being_aggregated`, and `successfully_aggregated_at`. The `is_being_aggregated` field will tell you whether the {props.job_type} job is ongoing or complete. When you see `connection_status: CONNECTED` and `is_being_aggregated: false` at the same time, the {props.job_type} job is done and you can move on to the next step. The `successfully_aggregated_at` field will give the exact time the job completed successfully, but of course will not update if the {props.job_type} job fails.
+
+You may need to check the connection status several times until an end state is reached.
+
+Make a GET request to the `/users/{user_guid}/members/{member_guid}/status` endpoint. The response below shows a successful end state.
+
+<CheckMemberStatus />
+<CheckMemberStatusResponse />
+

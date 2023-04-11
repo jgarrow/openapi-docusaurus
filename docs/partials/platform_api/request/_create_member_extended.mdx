@@ -1,0 +1,25 @@
+```shell Request
+curl -i -X POST 'https://int-api.mx.com/users/USR-11141024-90b3-1bce-cac9-c06ced52ab4c/members' \
+-u 'client_id:api_key' \
+-H 'Accept: application/vnd.mx.api.v1+json' \
+-H 'Content-Type: application/json' \
+-d '{
+      "member": {
+        "credentials": [
+          {
+            "guid": "CRD-1ec152cd-e628-e81a-e852-d1e7104624da",
+            "value": "mxuser"
+          },
+          {
+            "guid": "CRD-1ec152cd-e628-e81a-e852-d1e7104624da",
+            "value": "password"
+          }
+        ],
+        "id": "member-9876",
+        "institution_code": "mxbank",
+        "metadata": "some metadata",
+        "skip_aggregation": true
+      }
+    }'
+```
+

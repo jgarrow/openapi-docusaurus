@@ -4,7 +4,7 @@ import ResumeResponse from '/docs/partials/platform_api/response/_resume.mdx';
 
 This guide explains how to deal with multifactor authentication (MFA) while running an aggregation-type job. If you've been prompted for MFA, you've completed the following steps already:
 
-1. Called the aggregate member endpoint.
+1. Called the {props.job_type} endpoint.
 1. Checked the member's connection status: `GET /users/{user_guid}/members/{member_guid}/status`.
 
 MFA is indicated when you see a `connection_status` of `CHALLENGED`. You'll also see an array returned in this response called `challenges` which includes the specific question or questions the end user will need to answer to proceed.

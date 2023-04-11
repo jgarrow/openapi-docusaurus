@@ -1,0 +1,22 @@
+import CreateMember from '/docs/partial/platform_api/request/_create_member.mdx';
+import CreateMemberResponse from '/docs/partial/platform_api/response/_create_member.mdx';
+
+After you have the `user_guid`, an `institution_code`, and a `guid` for each credential required by the institution, create a new `member`. For this step, you need the values provided by the end user for each necessary credential.
+
+Make a POST request to the `/users/{user_guid}/members` endpoint. The response includes the newly created `member` and a standard aggregation is automatically kicked off. The `connection_status` is `CREATED` and the `is_being_aggregated` field is `true`.
+
+You can include the following parameters in your request.
+
+| Parameter                            | Data type | Description | Required? |
+|:-------------------------------------|:----------|:------------|:----------|
+| `background_aggregation_is_disabled` | Boolean   | When set to `true`, background aggregation will be disabled for this `member`. | No        |
+| `credentials`                        | Array     | The credentials endpoint for the requested `institution` will give you a list of all the `credentials` required to create a `member` for a given `institution`. Each required credential will need to be included within this array. | Yes       |
+| `id`                                 | String    | The unique partner-defined identifier for the `member`. | No        |
+| `institution_code`                   | String    | The unique code for the `institution` to which the `member` will connect. Defined by MX. | Yes       |
+| `metadata`                           | String    | Additional information you can store on this `member`. | No        |
+
+The following example uses MX Bank and therefore requires a username and a password. It sets the username to `mxuser` and the password to `password` which are the credentials for the test user for MX Bank. For real institutions, these values must be the end user's correct login information.
+
+<Admonition type="warning">
+Do not add multiple members that connect to the same <code>institution</code> using the same <code>credentials</code> on the same <code>user</code>. This will result in a <code>409 Conflict</code> error.
+</Admonition>
