@@ -1,0 +1,33 @@
+---
+sidebar_position: 2
+sidebar_label: Introduction
+---
+
+# Intro to Statements
+
+## In This Guide
+
+This guide will take you through the ETH process using API endpoints. After reading, you’ll be able to:
+
+* Create a user.
+* Search for an institution.
+* Create a member.
+* Gather statements.
+* Read the gathered statement data.
+* Download a statement PDF
+
+## API Workflow
+
+The workflow for performing a balance check is as follows:
+
+1. Create a user.
+1. Search for an institution.
+1. Get the credentials required by the institution.
+1. Create a member.
+1. Start the statement job.
+1. Poll the member’s connection status.
+1. Answer multifactor authentication, if necessary.
+1. Poll the member’s connection status again until it reaches an end state.
+    * A successful end state is when the connection_status is CONNECTED and the is_aggregating field changes from true to false.
+1. List the member’s statement data.
+1. Download a statement PDF.

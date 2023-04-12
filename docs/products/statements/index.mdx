@@ -1,0 +1,69 @@
+---
+sidebar_position: 1
+sidebar_label: Statements
+---
+
+
+import Diagram from '/static/img/statements_landing_diagram.png';
+import { UseCase } from '@site/src/components/UseCase';
+import ReadStatementResponse from '/docs/partials/platform_api/response/_read_statement.mdx';
+
+# Statements
+
+> Get monthly account statemtns
+
+With Statements, you can connect to an end user’s financial institution and retrieve monthly account statements in PDF format. This data can be used as part of a number of solutions including personal financial management or risk analysis.
+
+<img src={Diagram} />
+
+## Quick Links
+
+* [API reference](xxx)
+
+## Statement Data
+
+This sample response shows the kinds of data you can expect to get for statements, in addition  a PDF copy of a given statement.
+
+<ReadStatementResponse />
+
+## Related Products
+
+Organizations who use MX’s Statements often find the following products useful.
+
+* [Extended Transaction History](xxx)
+* [Instant Account Verification](xxx)
+* [Account Aggregation](xxx)
+* [Tax Documents](xxx)
+
+## Use Cases
+
+export function UseCaseSection({children}) {
+  return <div className="mt-6 mb-[60px] grid grid-cols-2 auto-rows-max gap-6">{children}</div>
+}
+
+<UseCaseSection>
+
+  <UseCase
+    slug="/use-cases/payments"
+    title="Personal Financial Management"
+    Svg={require("@site/static/img/money-hand.svg").default}
+  >
+    Help end users manage their money.
+  </UseCase>
+  <UseCase
+    slug="/use-cases/payments"
+    title="Financial Wellness"
+    Svg={require("@site/static/img/money-hand.svg").default}
+  >
+    Help end users improve their finances.
+  </UseCase>
+  <UseCase
+    slug="/use-cases/payments"
+    title="Risk Reduction"
+    Svg={require("@site/static/img/magnifying-glass.svg").default}
+  >
+    Prevent returns and other costly errors.
+  </UseCase>
+
+</UseCaseSection>
+
