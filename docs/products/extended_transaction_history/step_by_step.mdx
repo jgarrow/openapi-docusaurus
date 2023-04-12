@@ -14,6 +14,11 @@ import ReadAccountResponse from '/docs/partials/platform_api/response/_read_acco
 import RequiredCredentials from '/docs/partials/platform_api/_get_institution_required_credentials.mdx';
 import SearchInstitutions from '/docs/partials/platform_api/request/_search_institutions_extended.mdx';
 import SearchInstitutionsResponse from '/docs/partials/platform_api/response/_search_institutions_extended.mdx';
+import ListAccounts from '/docs/partials/platform_api/request/_list_accounts_by_member.mdx';
+import ListAccountsResponse from '/docs/partials/platform_api/response/_list_accounts_by_member.mdx';
+import ListTransactions from '/docs/partials/platform_api/request/_list_transactions_by_member.mdx';
+import ListTransactionsResponse from '/docs/partials/platform_api/response/_list_transactions_by_member.mdx';
+
 
 # ETH Step-by-step
 
@@ -76,4 +81,41 @@ Aggregation-type jobs such as ETH may trigger multifactor authentication (MFA) f
 
 Please see the detailed section on [answering MFA challenges](/products/balance_checks/dealing_with_mfa) for more information. For this part of the guide, we'll assume there was no MFA and move on to the next step.
 
+## 8. List Account Data
+
+The ETH job was successful and you can now read account information.
+
+Make a `GET` request to the `/users/{user_guid}/members/{member_guid}/accounts` endpoint. The response will include all the accounts belonging to the member.
+
+<ListAccounts />
+<ListAccountsResponse />
+
+<Admonition>
+There is another endpoint for listing accounts which may be more suitable for your use case: `GET /users/{user_guid}/accounts`.
+
+You may also consider reading the attributes of a specific account. There are two endpoints for this which return the same information, provided for code convenience:
+
+`GET /users/{user_guid}/members/{member_guid}/accounts/{account_guid}`
+
+`GET /users/{user_guid}/accounts/{account_guid}`
+</Admonition>
+
+## 9. List Transaction Data
+
+You can now read all the transaction data that has been gathered. Keep in mind that all list endpoints in the Platform API are paginated. To get the full list of transactions, you'll need to pay attention to the `pagination` object and make multiple requests specifying the `page` and the `records_per_page` in order to see all the available data. You can also limit results to a specific time frame using `from_date` and `to_date`.
+
+<ListTransactions />
+<ListTransactionsResponse />
+
+<Admonition type="info">
+There are multiple endpoints for listing transactions provided for code convenience. The others are:
+
+GET `/users/{user_guid}/accounts/{account_guid}/transactions`
+
+GET `/users/{user_guid}/transactions`
+
+You may also wish to read the details of a specific account:
+
+GET `/users/{user_guid}/transactions/{transaction_guid}`
+</Admonition>
 
