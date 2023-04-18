@@ -1,0 +1,78 @@
+---
+sidebar_position: 1
+sidebar_label: Account Owner Identification
+---
+
+import Diagram from '/static/img/aoi_landing_diagram.png';
+import { UseCase } from '@site/src/components/UseCase';
+import AccountOwnerData from '/docs/partials/platform_api/response/_list_account_owners.mdx';
+
+# Account Owner Identification
+
+> Get the name, address, and contact information for the owner of an account
+
+With Account Owner Identification, you can connect to an end user’s financial account to retrieve information such as name and address. You can use this data to verify the information provided by an end user. This can be used for solutions that require fraud and risk reduction, account opening, and digital banking.
+
+The Account Owner Identification product can be used as a standalone product or in combination with other MX products. If you use Account Owner Identification as a stand-alone product, you cannot use our Connect Widget interface for connecting accounts and will be required to complete an API-only integration. We encourage you to use Account Owner Identification in conjunction with Account Aggregation or Instant Account Verification so you can use our powerful Connect Widget.
+
+<img src={Diagram} />
+
+# Quick Links
+
+* [API reference](xxx)
+* [Demo App](xxx)
+* [Connect Widget Reference](xxx)
+
+# Account Owner Data
+
+This sample response shows the kinds of data you can expect to get for account owners.
+
+<AccountOwnerData />
+
+# Related Products
+
+Organizations who use MX’s Account Owner Identification often find the following products useful.
+
+* [Instant Account Verification](xxx)
+* [Account Aggregation](xxx)
+* [Balance Check](xxx)
+
+# Use Cases
+
+export function UseCaseSection({children}) {
+  return <div className="mt-6 mb-[60px] grid grid-cols-2 auto-rows-max gap-6">{children}</div>
+}
+
+<UseCaseSection>
+
+  <UseCase
+    slug="/use-cases/payments"
+    title="Money Movement"
+    Svg={require("@site/static/img/money-hand.svg").default}
+  >
+    Help end users manage their money.
+  </UseCase>
+  <UseCase
+    slug="/use-cases/payments"
+    title="Account Opening"
+    Svg={require("@site/static/img/money-hand.svg").default}
+  >
+    Help end users improve their finances.
+  </UseCase>
+  <UseCase
+    slug="/use-cases/payments"
+    title="Risk Reduction"
+    Svg={require("@site/static/img/magnifying-glass.svg").default}
+  >
+    Prevent returns and other costly errors.
+  </UseCase>
+  <UseCase
+    slug="/use-cases/payments"
+    title="Fraud Detection"
+    Svg={require("@site/static/img/mountains.svg").default}
+  >
+    Add more value to your online banking portal.
+  </UseCase>
+
+</UseCaseSection>
+

@@ -100,6 +100,14 @@ const config = {
                 to: "/products/extended_transaction_history",
                 label: "Extended Transaction History",
               },
+              {
+                to: "/products/statements",
+                label: "Statements",
+              },
+              {
+                to: "/products/account_owner_identification",
+                label: "Account Owner Identification",
+              },
               // {
               //   to: "/microdeposits",
               //   label: "Microdeposits"

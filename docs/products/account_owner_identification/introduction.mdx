@@ -1,0 +1,32 @@
+---
+sidebar_position: 2
+sidebar_label: Introduction
+---
+
+# Intro to Account Owner Identification
+
+## In This Guide
+
+This guide will take you through the Account Owner Identification (AOI) process using API endpoints. After reading this guide, you’ll be able to:
+
+* Create a user.
+* Search for an institution.
+* Create a member.
+* Gather account owner data.
+* Deal with multifactor authentication
+* Read the gathered owner data.
+
+## API Workflow
+
+The workflow for performing a balance check is as follows:
+
+1. Create a user.
+1. Search for an institution.
+1. Get the credentials required by the institution.
+1. Create a member.
+1. Start an AOI job.
+1. Poll the member’s connection status.
+1. Answer multifactor authentication, if necessary.
+1. Poll the member’s connection status again until it reaches an end state.
+    * A successful end state is when the `connection_status` is `CONNECTED` and the `is_aggregating` field changes from `true` to `false`.
+1. List the member’s owner information or read a particular owner's information.
