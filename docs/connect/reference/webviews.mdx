@@ -1,0 +1,163 @@
+---
+sidebar_position: 5
+sidebar_label: Connect in WebViews
+---
+
+import SuggestedConfiguration from '/docs/partials/connect/request/_embedding_in_webviews.mdx';
+import WidgetURL from '/docs/partials/connect/response/_widget_url.mdx';
+import JavaExample from '/docs/partials/connect/_java.mdx';
+import SwiftExample from '/docs/partials/connect/_swift.mdx';
+
+
+# Connect in Webviews
+
+All Connect Widget implementations that use WebViews must set `is_mobile_webview` to `true` when requesting a widget URL. This has a number of effects on how to properly handle the widget in your application.
+
+When set to `true` the widget will:
+
+* Send [postMessages](xxx) to the WebView via `window.location = {scheme}://{event path}?metadata={json encoded metadata}` instead of `window.postMessage(eventObject)`;
+* Implicity set the `oauth_referral_source` to `APP` so the OAuth flow will redirect back to a native application instead of sending a postMessage to the opening window;
+* Prevent the widget from automatically trying to open an OAuth window; instead it will send the [OAuth requested postmessage](xxx) so your app can correctly open the OAuth window in the user agent.
+
+This is described in more detail in the following sections.
+
+## UI Event Messages in WebViews
+
+Because of the technical limitations of WebView-based implementations, an alternative to standard postMessages is required. MX has developed a simple URL-based updating mechanism to replace event messages that are available to other implementations. Partners can capture these URLs and use the information provided in them to build the necessary logic for coordinating application events.
+
+If Connect is configured with `is_mobile_webview` set to `true`, we will use navigation events with `window.location = url` instead of `window.postMessage(message)`. Partners must capture the URL, parse out the path and query string, then JSON-decode the metadata field.
+
+By default, the `ui_message_webview_url_scheme` will be `mx`. This can be configured when requesting a widget URL by setting the value to whatever custom string you prefer, for example `yourAppScheme`.
+
+<Admonition type="warning">
+Your app **must** capture all navigation events to `mx://` and custom schemes like `yourAppScheme://` so the WebView doesn't lose the Connect Widget session and the app doesn't break.
+</Admonition>
+
+**Example Navigation Event Schema**
+
+```
+Schema:
+{ui_message_webview_url_scheme}://{some/path}?metadata={jsonString}
+
+Default:
+mx://connect/loaded?metadata={jsonString}
+
+Custom:
+yourAppScheme://connect/institutionSearch?metadata={jsonString}
+```
+
+**Suggested Configuration for WebViews**
+
+<SuggestedConfiguration />
+<WidgetURL />
+
+**Code Examples**
+
+<JavaExample />
+<SwiftExample />
+
+## OAuth in WebViews
+
+There are several configuration options that influence how OAuth works in WebViews, described in detail below.
+
+If you are looking for a more guided approach to integrating Connect into iOS, Android, or as a hybrid app, [see the guide](/connect/guides/mobile)
+
+### ui_message_version
+
+This setting influences which postMessages are sent from the widget. It defaults to version `4`, which is the most recent version of postMessages. All other versions are deprecated and should not be used.
+
+The [OAuth requested postMessage](xxx) in particular is a key event for WebView implementations. You'll need to capture this message and redirect the user to the provided URL.
+
+### client_redirect_url
+
+This setting is used as the redirect destination at the end of OAuth. MX will append query string parameters to the supplied URL that describe what happened during OAuth.
+
+**Example**
+
+`client_redirect_url: "https://mx.com"`
+
+```
+https://mx.com?status=success&member_guid={MBR-XXX}
+```
+
+**Example**
+
+`client_redirect_url: "https://mx.com?state=mystate"`
+
+```
+https://mx.com?state=mystate&status=success&member_guid={MBR-XXX}
+```
+
+**Query parameters added to the URL**
+
+| Name          | Values | Type | Description |
+| ---           | --- | --- | --- |
+| `status`      | `success`<br></br>`error` | String | This indicates whether the OAuth process was successful or errored. |
+| `member_guid` | `MBR-XXX`            | String | The unique identifier for the member that was created or updated during the OAuth process. |
+| `error_reason`| `CANCELLED`<br></br>`DENIED`<br></br>`IMPEDED`<br></br>`PROVIDER_ERROR`<br></br>`SERVER_ERROR`<br></br>`SESSION_ERROR` | String | The reason for an OAuth error. |
+
+**Error Reasons**
+
+| Value            | Definition |
+| ---              | --- |
+| `CANCELLED`      | The user cancelled or exited the OAuth process. |
+| `DENIED`         | The user was unable to authenticate with the provider. |
+| `IMPEDED`        | User action is required at the provider's website. |
+| `PROVIDER_ERROR` | An unknown error occurred at the provider. |
+| `SERVER_ERROR`   | An unknown error occurred. |
+| `SESSION_ERROR`  | The user was unable to reauthenticate using the existing session. |
+
+### ui_message_webview_url_scheme
+
+This setting is used alongside either `is_mobile_webview: true` *or* `oauth_referral_source: "APP"`. It's value is used as the scheme for WebView event messages. It is also the destination scheme for the redirect at the end of OAuth. MX Recommends using `client_redirect_url` rather than `ui_message_webview_url_scheme`, if possible.
+
+The same query parameters described in the `client_redirect_url` section are appended to the scheme.
+
+**Example Redirect**
+
+```
+yourAppScheme://oauth_complete?status=success&member_guid={MBR-XXX}
+```
+
+### oauth_referral_source
+
+This setting is meant for hybrid webapps that:
+
+* Embed the widget in an iframe inside their webapp that is in a WebView;
+* Don't want to set `is_mobile_webview: true`;
+* Need to redirect back to a native app instead of using postMessages.
+
+It influences what MX does at the end of OAuth. The default `BROWSER` tells the widget to send a postMessage to `window.opener`. If `APP` is set instead, the widget will redirect the user to either the `client_redirect_url` or the `ui_message_webview_url_scheme`.
+
+<Admonition type="info">
+Remember that `is_mobile_webview: true` implicitly sets `oauth_referral_source: APP`. Not using it or setting it to `false` will use the default of `BROWSER`.
+</Admonition>
+
+**PostMessage with Default Value of `BROWSER`**
+
+```
+{
+  mx: true,
+  type: "oauthComplete/{success|error}",
+  metadata: {
+    member_guid: "{member_guid}",
+    error_reason: "{reason}" // only in error events
+  }
+}
+```
+
+**Redirect with Value of `APP`**
+
+```
+// `client_redirect_url: "https://mx.com"`
+
+https://mx.com?status={success|error}&member_guid={member_guid}&error_reason={error_reason}
+```
+
+**Redirect with Value of `APP`**
+
+```
+// `ui_message_webview_url_scheme`: "yourAppScheme"
+
+yourAppScheme://oauth_complete?status={success|error}&member_guid={member_guid}&error_reason={error_reason}
+```

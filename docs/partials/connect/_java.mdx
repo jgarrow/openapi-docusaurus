@@ -1,0 +1,22 @@
+
+```java Java
+public class MainActivity extends AppCompatActivity {
+    private WebView webView = null;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+      webView = (WebView) findViewById(R.id.webview);
+      webView.setWebViewClient(new ConnectWebviewClient());
+      webView.getSettings().setDomStorageEnabled(true);
+      webView.getSettings().setJavaScriptEnabled(true);
+    }
+    private class ConnectWebviewClient extends WebViewClient {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            if (url.startsWith("mx://")) {
+                return true;
+            }
+            return false;
+        }
+    }
+}
+```

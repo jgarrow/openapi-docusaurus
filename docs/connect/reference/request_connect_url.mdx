@@ -1,0 +1,20 @@
+---
+sidebar_position: 1
+sidebar_label: Request a Connect Widget URL
+---
+
+import RequestUrl from '/docs/partials/connect/request/_request_url.mdx';
+import RequestUrlResponse from '/docs/partials/connect/response/_request_url.mdx';
+
+# Request a Connect Widget URL
+
+This endpoint allows partners to get a URL by passing the `widget_type` in the request body, as well as configuring it in several different ways. In the case of Connect, that means setting the `widget_type` to `connect_widget`. Partners may also pass an optional `Accept-Language` header. Note that this is a POST request.
+
+Widget URLs are one-time use. You must fetch a new widget URL each time you load the widget.
+
+<Admonition type="notice">
+In this request, the Connect Widget must be carefully configured for the specific task it is being used for. Please see the extensive [section on configuration](xxx) for the complete list of parameters and all the details you’ll need to set them correctly.
+</Admonition>
+
+<RequestUrl />
+<RequestUrlResponse />

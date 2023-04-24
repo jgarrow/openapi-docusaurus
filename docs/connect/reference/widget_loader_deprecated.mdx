@@ -1,0 +1,35 @@
+---
+sidebar_position: 7
+sidebar_label: JavaScript Loader (Deprecated)
+---
+
+import Loader from '/docs/partials/connect/_widget_loader_connect.mdx';
+
+# Connect Widget JavaScript Loader (Deprecated)
+
+<Admonition type="info">
+The JavaScript loader is deprecated. The loader below will continue to work, but clients should use the new [web SDK](xxx) instead.
+</Admonition>
+
+Once you've generated a URL, you can pass that information on to a JavaScript loader provided by MX. This loader allows you to further configure your Connect widget, including the size as well as all the supported configuration options, inside the `config` object.
+
+It also allows you to listen for event messages that indicate loading or a successful member creation.
+
+<Admonition type="warning">
+The event messages handled by `onEvent` below allow partners to take action in their own codebase in response to events triggered within the Connect widget's UI. They are intended specifically to allow a partner’s code and the widget's UI to work in concert over a single session, not to give canonical information on the state of a `member` or other information available by request to the appropriate endpoint, e.g., **read member connection status**.
+</Admonition>
+
+**Example Usage**
+
+<Loader />
+
+**Parameters available for the JavaScript loader**
+
+| Parameter | Data Type | Description                                                                                                                            | Required? |
+|:----------|:----------|:---------------------------------------------------------------------------------------------------------------------------------------|:----------|
+| `config`  | Object    | This object allows you to set additional parameters to load the MX Connect widget in a specific state.                                 | No        |
+| `height`  | String    | Desired height of the iframe. Defaults to 600 pixels.                                                                                  | No        |
+| `id`      | String    | The `id` of the DOM element you'll load the widget into.                                                                               | Yes       |
+| `onEvent` | Function  | A general event handler. Only available with `ui_message_version: 4` or higher, which is the required version for the MX Platform API. | No        |
+| `width`   | String    | Desired width of the iframe. Defaults to 100% of the parent.                                                                           | No        |
+| `url`     | String    | A URL for the widget provided as a response to the `POST` request above.                                                               | Yes       |

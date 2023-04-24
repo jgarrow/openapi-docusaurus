@@ -1,0 +1,157 @@
+---
+sidebar_position: 2
+sidebar_label: Configuring Connect
+---
+
+import Exclude from '/docs/partials/connect/request/_excluding_transaction_data.mdx';
+import WidgetURL from '/docs/partials/connect/response/_widget_url.mdx';
+import SpecificInstitution from '/docs/partials/connect/request/_loading_a_specific_institution.mdx';
+import CurrentMember from '/docs/partials/connect/request/_loading_a_specific_member.mdx';
+import VerificationMode from '/docs/partials/connect/request/_verification_mode.mdx';
+import IncludeIdentity from '/docs/partials/connect/request/_include_identity.mdx';
+import LanguageOptions from '/docs/partials/platform_api/_language_options.mdx';
+
+
+# Configuring Connect
+
+The Connect Widget requires careful configuration for different kinds of tasks. You'll find detailed definitions and behaviors for each configuration option in the sections below, along with code examples for some of the more important configurations.
+
+If you don't need all that info, check out the config quick reference for common tasks right here.
+
+## Config Quick Reference
+
+| Task                                                                 | Config   |
+|:---------------------------------------------------------------------|:---------|
+| Answer MFA for a specific member                                     | Set the `current_member_guid` to a member whose `connection_status` is `CHALLENGED`. Connect will load the MFA view so the end user can respond to the MFA challenge. |
+| Disable search when loading a specific institution                   | Set `disable_institution_search` option to `true` and set the `current_institution_code` or `current_member_guid` option. Connect will load the login view for the specified institution, but will not allow the end user to navigate to the search view. |
+| Resolve a member's error(s)                                          | Set the `current_member_guid` option to a member in an error state. Connect will load in the error view so the end user can resolve the error. |
+| Run a standard aggregation but exclude transactions                  | Set the `include_transactions` option to `false` and leave `mode` as the default (or explicitly set it to `aggregatiopn`). Connect will not aggregate transaction data. Future manual or background aggregations will not be affected. |
+| Run an aggregation with a specific institution                       | Set the `current_institution_code` option to the desired institution's code and leave the `mode` as the default (or explicitly set it to `aggregation`). Connect will load the login view for that institution. |
+| Run a verification with a specific institution                       | Set the `current_institution_code` option to the desired institution's code, and set the `mode` to `verification`. Connect will load the login view for that institution. |
+| Update a member's credentials                                        | Set the `current_member_guid` to the desired member's GUID; if the member's credentials need to be updated, Connect will load the update credentials view for the member.  |
+| Update a member's credentials (alternate)                            | Set the `current_member_guid` to the desired member's GUID, and set the `update_credentials` option to `true`. Connect will load the update credentials view for the member. **This option should be used sparingly.** It is best practice to set only `current_member_guid` and let the widget take care of things, as described above. |
+
+## Configuration Options
+
+### Options for All Widget Types
+
+| Option        | Type   | Description                                                |
+|:--------------|:-------|:-----------------------------------------------------------|
+| `widget_type` | String | This determines which widget URL you'll receive. |
+
+### Connect-Only Options
+
+#### Primary Data Type Options
+
+These options define the primary type of data the Connect Widget will gather and the event messages related to that process.
+
+| Option                                                                             | Type    | Description |
+|:-----------------------------------------------------------------------------------|:--------|:------------|
+| `mode`                                                                             | String  | `mode` is the most important option for the Connect Widget. This determines what kind of process Connect will run, which affects how you should set many other options. Defaults to `aggregation`.<br></br><br></br>`aggregation` mode retrieves account and transaction data; in other words, this runs a standard aggregation.<br></br><br></br>`tax` mode retrieves tax document PDFs. **You must explicitly set `disable_background_agg: true` when using tax mode for this feature to function properly.**<br></br><br></br>`verification` mode retrieves account numbers and routing/transit numbers; in other words, it runs an Instant Account Verification (IAV). <ul><li>By default, verification mode does not retrieve transaction data; this default can be modified with secondary options.</li><li>By default, [background aggregation](xxx) is disabled for all members created in verification mode; this default can be modified with secondary options.</li><li>[Learn more about Connect's verification mode](#xxx). Also see our [verification guide](xxx).</li></ul> |
+| [`ui_message_version`](xxx) | Integer | This determines which version of [postMessage events](xxx) are triggered. Defaults to `4`. **All new implementations must use version 4. Prior versions are deprecated.** |
+
+#### Secondary Data Type Options
+
+These options define additional types of data the Connect Widget will gather.
+
+| Option                                                                  | Type    | Description|
+|:------------------------------------------------------------------------|:--------|:-----------|
+| `disable_background_agg`                                                | Boolean | This determines whether background aggregation is enabled or disabled for the member created by the Connect Widget. Defaults to `false` in `aggregation` mode and `true` in `verification` mode. A global default for all members can be set by reaching out to MX. |
+| [`include_identity`](xxx) | Boolean | This determines whether an account owner identification (AOI, previously called "identity verification") is run in addition to the process specified by the `mode`. Defaults to `false`. This can be set in either `aggregation` or `verification` mode. The AOI runs after the primary process is complete. |
+| `include_transactions`                                                  | Boolean | This determines whether transaction data are retrieved. Defaults to `true` in aggregation mode and `false` in verification mode. This can be set in either `aggregation` or `verification` mode. This option does not affect future foreground or background aggregations. |
+
+#### Authentication Options
+
+These options are all related to authentication and how it is handled in different situations, including how some event messages are delivered.
+
+| Option                                  | Type    | Description |
+|:----------------------------------------|:--------|:------------|
+| [`client_redirect_url`](#xxx)           | String  | This determines the redirect destination at the end of OAuth when used with `is_mobile_webview: true` or `oauth_referral_source: "APP"`. |
+| [`is_mobile_webview`](#xxx)             | Boolean | This configures the widget to render in a mobile WebView. JavaScript event postMessages are replaced with URL updates. |
+| [`oauth_referral_source`](#xxx)         | String  | This determines how MX will respond to the result of an OAuth flow.<br></br><br></br>When set to `APP`, MX will redirect to the URI specified in the `ui_message_webview_url_scheme`.<br></br><br></br>When set to `BROWSER`, MX will send a postMessage but not redirect.<br></br><br></br>If `is_mobile_webview` is `true`, this defaults to `APP`. If `false`, it defaults to `BROWSER`. |
+| [`ui_message_webview_url_scheme`](#xxx) | String  | This is a client-defined scheme used in OAuth redirects in WebViews; also used in URL updates when these replace postMessages in WebViews. Defaults to `mx`. |
+
+#### View Options
+
+The Connect Widget can be loaded directly into different views to allow end users to accomplish specific tasks.
+
+| Option                       | Type    | Description |
+|:-----------------------------|:--------|:------------|
+| `current_institution_code`   | String  | Load the widget into the credential view for the specified institution. |
+| `current_institution_guid`   | String  | Load the widget into the credential view for the specified institution. |
+| `current_member_guid`        | String  | Load the widget into a specific member that contains an error or requires multifactor authentication. The widget will determine the best view to load based on the member's current state. `current_member_guid` takes precedence over `current_institution_code` and `current_institution_guid`. |
+| `disable_institution_search` | Boolean | This determines whether the institution search is displayed within the Connect Widget. This option **must** be used with `current_institution_code`, `current_instituion_guid`, or `current_member_guid`. When set to `true`, the institution search feature will be disabled and end users will not be able to navigate to it. Defaults to `false`. |
+| `update_credentials`         | Boolean | Load the widget into a view that allows them to update the current member. Optionally used with `current_member_guid`. **This option should be used sparingly**. The best practice is to use `current_member_guid` and let the widget resolve the issue. |
+
+#### Customization Options
+
+| Option                       | Type    | Description |
+|:-----------------------------|:--------|:------------|
+| `color_scheme`               | String  | Load the widget with the specified `color_scheme`; options are `light` and `dark`. Defaults to `light`. |
+
+## Excluding Transaction Data
+
+Sometimes you don’t need transaction data right away, or you may be concerned that gathering transaction data may take some time and delay your preferred flow. Or you may be running an account verification job and don’t need transaction data at all.
+
+You can set the `include_transactions` option to `false` to potentially speed up a first-time aggregation in aggregation mode, or make sure you don’t get unwanted data when in verification mode.
+
+<Exclude />
+<WidgetURL />
+
+## Loading a Specific Transaction
+
+The Connect Widget can be loaded directly into a specific institution for gathering credentials (for instance, your own institution), rather than loading the search institutions view and leaving it up to the user to find the correct institution.
+
+You should consider using this configuration with the `disable_institution_search` option to prevent the end user from going back to the search view and manually loading a different institution.
+
+<SpecificInstitution />
+<WidgetURL />
+
+## Load a Specific Member to Resolve an Issue
+
+When you load the Connect Widget with a specific member GUID, it will determine the best course of action based on the state of that member, such as prompting for MFA or resolving an error state. Rather than trying to figure out what do with with each and every connection_status, it is best to configure your request with the `current_member_guid` in question and allow it to automatically determine the best course of action for the end user.
+
+You should consider using this configuration with the `disable_institution_search` option to prevent the end user from manually attempting to create a new member.
+
+MX **does not recommend** using this configuration with the `update_credentials` option.
+
+<CurrentMember />
+<WidgetURL />
+
+## Verification Mode
+
+Verification mode is used to gather account and routing numbers, which MX calls instant account verification (IAV). Setting the `mode` to `verification` will change several behaviors for the Connect Widget and for associated members:
+
+* The end user will be prompted to verify an existing connection (if they have one) before going to search.
+* Connect will only search for and display institutions that support IAV.
+* After gathering credentials, Connect will start an IAV job rather than an aggregation job.
+* Because this is and IAV, `include_transactions` will be set to false, so no transaction data will be gathered. If this data is needed, you must explicitly set `include_transactions` to `true`.
+* [Background aggregation](xxx) will be disabled for members created by the Connect Widget, even if the `include_transactions` parameter is set to `true`. For existing connections, the existing background aggregation setting is preserved.
+
+<VerificationMode />
+<WidgetURL />
+
+## Account Owner Identification
+
+If you need to collect account owner identity data in addition to verification or aggregation, you can use the `include_identity` option. There is currently no standalone identification mode. Identity jobs must be run in addition to either verification or aggregation.
+
+Setting `include_identity` to `true` will produce the following behaviors:
+* The widget will only search for and display institutions that support both the primary job defined by the `mode` (`aggregation` or `verification`) and AOV.
+* The widget will run an AOV in addition to the primary job. The primary job will run first and the AOV will run **after** the primary job has completed.
+* The [member connected](xxx) postMessage event will not be sent until **both** jobs are complete.
+
+<IncludeIdentity />
+<WidgetURL />
+
+## Waiting for a Full Aggregation
+
+The `wait_for_full_aggregation` option is now ignored. Connect now behaves as if this was set to true and will wait until the member is done aggregating before completing. Using false is no longer supported or advised.
+
+This change does not require anyone to update their integration and only affects the timing of the [member connected post message](xxx).
+
+## Language Options
+
+<LanguageOptions />
+
+
+

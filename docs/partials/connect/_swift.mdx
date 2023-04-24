@@ -1,0 +1,28 @@
+
+```swift Swift
+class ViewController: UIViewController, WKUIDelegate {
+  override func viewDidLoad() {
+      super.viewDidLoad()
+      webView.delegate = self
+      ...
+  }
+
+  func webView(_ webView: WKWebView, decidePolicyFor
+    navigationAction: WKNavigationAction,
+    decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void) {
+
+    // Intercept custom URI
+    let surl = navigationAction.url?.absoluteString
+    if (surl?.hasPrefix("mx://"))! {
+      // Take action here
+
+      // Cancel request
+      decisionHandler(.cancel)
+      return
+    }
+
+    // Allow request
+    decisionHandler(.allow)
+  }
+}
+```

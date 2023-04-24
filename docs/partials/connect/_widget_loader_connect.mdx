@@ -1,0 +1,26 @@
+```javascript
+<script src="https://atrium.mx.com/connect.js"></script>
+/**
+ * The reference to "atrium" is a holdover from a legacy API.
+ * Nevertheless, this is still the correct source for the widget loader
+ * even in the context of the Platform API.
+ */
+
+<script>
+var mxConnect = new window.MXConnect({
+  id: "connect-widget",
+  iframeTitle: "Connect",
+  /**
+   * Callback that for handling all events within Connect.
+   * Only called in  ui_message_version 4 or higher.
+   *
+   * The events called here are the same events that come through post
+   * messages.
+   */
+  onEvent: function (type, payload) {
+    console.log("onEvent", type, payload);
+  },
+  targetOrigin: "*",
+})
+</script>
+```

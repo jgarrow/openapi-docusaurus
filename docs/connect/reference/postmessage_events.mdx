@@ -1,0 +1,392 @@
+---
+sidebar_position: 4
+Sidebar_label: PostMessage UI Events
+---
+
+# PostMessage UI Events
+
+A postMessage is an event-based protocol that allows partners to take action in their own codebase in response to events triggered within a widget’s user interface. They are intended specifically to allow a partner’s code and a widget user interface to work in concert, _not_ to give a full picture of events happening on MX servers. PostMessage events should not be used for keeping data in sync between platforms.
+
+Webhooks are a more reliable way of coordinating events between partner servers and MX servers, rather than the UI-oriented postMessages.
+
+Events from MX will have `mx`, `type`, and `metadata` properties.
+
+The `mx` field is provided as an easy way for partners to filter out postMessage events coming from MX.
+
+The `type` field has the following schemea: `mx/<entity|widget>/<event>`. For example:
+
+* `mx/account/created`
+* `mx/connect/institutionSelected`
+* `mx/transaction/updated`
+
+The `type` field identifies what the event represents at a high level. It is also useful for matching events for a given entity or widget, e.g, all account events will be prefixed with `mx/account/*`.
+
+The `metadata` field is an object that has information related to the `type` that may be important, such as the account or transaction that was updated, the institution that was selected, etc. `metadata` objects will also have the `user_guid` and `session_guid` fields.
+
+**Example Integration**
+
+```js
+function handleEvent(event) {
+  if (event.data.mx) {
+    // handle the mx post message using event.data.type and event.data.metadata.
+  }
+}
+
+window.addEventListener('message', handleEvent)
+```
+**Example Event**
+
+```js
+const mxEvent = {
+  mx: true,
+  type: 'mx/account/created',
+  metadata: {
+    user_guid: 'USR-123',
+    session_guid: 'ANS-123'
+    // relevant data for the given type
+  }
+}
+```
+
+## Connect Loaded
+
+Triggers when the Connect widget loads. It is often useful to know what “step” or view the user started on.
+```json
+{
+  "type": "mx/connect/loaded",
+  "mx": true,
+  "metadata": {
+    "user_guid": "USR-123",
+    "session_guid": "ANS-123",
+    "initial_step": "search"
+  }
+}
+```
+
+The `initial_step` can be:
+
+| Value                   | Definition |
+|:------------------------|:-----------|
+| `connected`             | The initial step when configured with `current_member_guid` and the member is in a connected state. |
+| `disclosure`            | The initial step when configured to display the disclosure screen that shows the MX privacy policy first. This is optional and is turned off by default. |
+| `enterCreds`            | The initial step when configured with `current_institution_guid` or `current_member_guid`, and `updated_credentials` set to `true`. |
+| `loginError`            | The initial step when configured with `current_member_guid` and the member is in an error state. |
+| `mfa`                   | The initial step when configured with `current_member_guid` and the member has encountered multi-factor authentication. |
+| `search`                | The default initial step. |
+| `verifyExistingMember`  | The initial step when configured with `mode` set to `verification`. |
+
+## Enter Credentials
+
+Triggered when a user submits credentials for a given institution for the first time.
+
+```json
+{
+  "type": "mx/connect/enterCredentials",
+  "mx": true,
+  "metadata": {
+    "user_guid": "USR-123",
+    "session_guid": "ANS-123",
+    "institution": {
+      "code": "mxbank",
+      "guid": "INS-123"
+    }
+  }
+}
+```
+
+## Institution Search
+
+Triggered when the end user searches for an institution. This is useful in determining what users are searching for.
+
+```json
+{
+  "type": "mx/connect/institutionSearch",
+  "mx": true,
+  "metadata": {
+    "user_guid": "USR-123",
+    "session_guid": "ANS-123",
+    "query": "MX Bank"
+  }
+}
+```
+
+## Institution Selected
+
+Triggered when an end user selects an institution from the institution list.
+
+```json
+{
+  "type": "mx/connect/selectedInstitution",
+  "mx": true,
+  "metadata": {
+    "code": "mxbank",
+    "guid": "INS-123",
+    "name": "MX Bank",
+    "session_guid": "ANS-123",
+    "url": "www.example.com",
+    "user_guid": "USR-123"
+  }
+}
+```
+
+## Invalid Data, Primary Action Selected
+
+Triggered when there are no valid demand deposit (DDA) accounts on the member and the user selects **OK** on the associated error screen.
+
+**Conditions**
+
+* `"mode": "verification"`
+* `"disable_institution_search: true`
+* The member does not have any valid DDA accounts.
+* The user selects **OK** on the error screen.
+
+```json
+{
+  "type": "mx/connect/invalidData/primaryAction",
+  "mx": true,
+  "metadata": {
+    "member_guid": "MBR-123",
+    "session_guid": "ANS-123",
+    "user_guid": "USR-123"
+  }
+}
+```
+
+## Member Connected
+
+Triggered when a member has successfully connected and completed all job(s).
+
+At this point the widget is done and data is available for retrevial.
+
+```json
+{
+  "type": "mx/connect/memberConnected",
+  "mx": true,
+  "metadata": {
+    "user_guid": "USR-123",
+    "session_guid": "ANS-123",
+    "member_guid": "MBR-123"
+  }
+}
+```
+
+## Member Connected, Primary Action Selected
+
+Triggered when the user selects the primary button on the connected step.
+
+```json
+{
+  "type": "mx/connect/connected/primaryAction",
+  "mx": true,
+  "metadata": {
+    "user_guid": "USR-123",
+    "session_guid": "ANS-123"
+  }
+}
+```
+
+## Member Connection Error
+
+Triggered when a member has encountered an error state. This is useful in determining when the user is in an error state and resolving it based on the connection_status.
+
+```json
+{
+  "type": "mx/connect/memberError",
+  "mx": true,
+  "metadata": {
+    "user_guid": "USR-123",
+    "session_guid": "ANS-123",
+    "member": {
+      "guid": "MBR-123",
+      "connection_status": 6
+    }
+  }
+}
+```
+
+## Member Create Error
+
+Triggered when a member failed to get created when credentials were entered.
+
+```json
+{
+  "type": "mx/connect/createMemberError",
+  "mx": true,
+  "metadata": {
+    "user_guid": "USR-123",
+    "session_guid": "ANS-123",
+    "institution_guid": "INS-123",
+    "institution_code": "mxbank"
+  }
+}
+```
+
+## Member Deleted
+
+Triggered when a member has been deleted in the widget.
+
+```json
+{
+  "type": "mx/connect/memberDeleted",
+  "mx": true,
+  "metadata": {
+    "user_guid": "USR-123",
+    "session_guid": "ANS-123",
+    "member_guid": "MBR-123"
+  }
+}
+```
+
+## Member Status Update
+
+Triggered when a member’s connection status has changed while connecting. This is useful in determining the current connection status of the member.
+
+<Admonition type="info">
+A `connection_status` of `6` (CONNECTED) does not mean data is available yet. To ensure that data is available, refer to the [memberConnected](xxx) event instead.
+</Admonition>
+
+```json
+{
+  "type": "mx/connect/memberStatusUpdate",
+  "mx": true,
+  "metadata": {
+    "user_guid": "USR-123",
+    "session_guid": "ANS-123",
+    "member_guid": "MBR-123",
+    "connection_status": 6
+  }
+}
+```
+
+## OAuth Error
+
+Triggered when the user lands on the OAuth error page. This is a general error message and could represent a problem with the OAuth provider or MX.
+
+```json
+{
+  "type": "mx/connect/oauthError",
+  "mx": true,
+  "metadata": {
+    "user_guid": "USR-123",
+    "session_guid": "ANS-123",
+    "member_guid": "MBR-123"
+  }
+}
+```
+
+## OAuth Requested
+
+Triggered when the user navigates to the OAuth provider's site. Note that the redirect does not happen in WebViews. The native app will need to use this postMessage to send the user to the URL contained in the metadata.
+
+```json
+{
+  "type": "mx/connect/oauthRequested",
+  "mx": true,
+  "metadata": {
+    "user_guid": "USR-123",
+    "session_guid": "ANS-123",
+    "url": "https://something.com",
+    "member_guid": "MBR-123"
+  }
+}
+```
+
+## Step Change
+
+<Admonition type="warning">
+Connect flows and steps are constantly being evaluated, updated, and optimized. The steps listed below are subject to change without notice.
+</Admonition>
+
+Triggered when the end user changes from one “step” to another. This event is provided for gaining insight into what transitions users are making. Possible step values can be:
+
+```json
+{
+  "type": "mx/connect/stepChange",
+  "mx": true,
+  "metadata": {
+    "user_guid": "USR-123",
+    "session_guid": "ANS-123",
+    "previous": "search",
+    "current": "enterCreds"
+  }
+}
+```
+
+| Current/Previous Value     | Definition |
+|:---------------------------|:-----------|
+| `addManualAccount`         | Where the user creates manual accounts. Manual accounts are not currently offered in the Platform API; partners should not expect to see this value. |
+| `connected`                | Where the user lands when they have successfully connected. |
+| `connecting`               | Where the user goes while the connection is being attempted. |
+| `disclosure`               | Where the user reads the MX privacy policy and agrees by selecting Continue. This is optional and is turned off by default. |
+| `enterCreds`               | Where the user enters credentials for a particular institution. |
+| `error`                    | Where the user lands when the member create was unsuccessful due to user or system error. |
+| `existingMember`           | Where the user lands if they are trying to add a member they have previously added. |
+| `loginError`               | Where the user lands when they have unsuccessfully connected due to user or system error. |
+| `mfa`                      | Where the user enters in MFA responses. |
+| `oauth`                    | Where the user goes instead of enter credentials if the institution and client supports oauth. |
+| `search`                   | Where the user searches for institutions. |
+| `search`                   | Where the user searches for institutions. |
+| `timeOut`                  | When the user has been connecting for more than 30 seconds without any updates to the member. |
+| `verifyExistingMember`     | Where the user can verify existing members when `mode` set to verification. |
+
+## Submit MFA
+
+Triggered when a user submits an MFA answer.
+
+```json
+{
+  "type": "mx/connect/submitMFA",
+  "mx": true,
+  "metadata": {
+    "user_guid": "USR-123",
+    "session_guid": "ANS-123",
+    "member_guid": "MBR-123"
+  }
+}
+```
+
+## Update Credentials
+
+Triggered when a user submits credentials while trying to update their existing credentials.
+
+```json
+{
+  "type": "mx/connect/updateCredentials",
+  "mx": true,
+  "metadata": {
+    "user_guid": "USR-123",
+    "session_guid": "ANS-123",
+    "member_guid": "MBR-123",
+    "institution": {
+      "code": "mxbank",
+      "guid": "INS-123"
+    }
+  }
+}
+```
+
+## Widget Load
+
+Triggered when the app is loaded.
+
+```js
+{
+  "type": "mx/load",
+  "mx": true
+}
+```
+
+## Widget Ping
+
+Used to keep the widget session alive.
+
+```js
+{
+  "type": "mx/ping",
+  "mx": true,
+  "metadata": {
+    "user_guid": "USR-123",
+    "session_guid": "ANS-123"
+  }
+}
+```

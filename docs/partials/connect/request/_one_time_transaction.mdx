@@ -1,0 +1,15 @@
+
+```shell
+curl -i -X POST https://int-api.mx.com/users/USR-29eab3cf-6a87-fe97-6279-563b63e75a53/widget_urls \
+  -H 'Accept: application/vnd.mx.api.v1+json' \
+  -u 'client_id:api_key' \
+  -H 'Content-type: application/json' \
+  -d '{
+        "widget_url": {
+          "widget_type": "connect_widget",
+          "mode": "verification",
+          "include_transactions": true,
+          "disable_background_agg": true
+        }
+      }'
+```
