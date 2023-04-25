@@ -1,0 +1,124 @@
+---
+sidebar_position: 3
+sidebar_label: Connect Widget Implementation Guides
+---
+
+# Connect Widget Implementation Guides
+
+The Connect Widget is a ready-made and embeddable application that helps you get your user’s financial data by navigating the complex aggregation process for you. It searches for institutions, creates new members, gathers credentials, prompts for MFA, resolves errors, and can start verification and aggregation jobs.
+
+Let's Get Started!
+
+## Demo App
+
+One way to get started with our Connect Widget is by using the MXquickconnect demo app. The app, coupled with sample code, demonstrates adding new users and members (connecting a user to their financial account) and making additional requests for a number of use cases.
+
+Before you get started, you'll need to sign up for the Platform API and get your `api_key` and `client_id` from the [Client Dashboard](xxx) to set up the backend.
+
+You'll also need to clone the app from out [GitHub repository](https://github.com/mxenabled/mx-quickconnect).
+
+### Backend Setup
+
+The app requires that you set up the frontend and backend for a successful launch. The instructions you need to get started follow.
+
+You can run the backend with either Ruby, Node.js, Python3, or AspNet.
+
+1. Open your terminal and clone the app from Github if you haven’t already.
+2. Navigate to the mx-quickconnect folder using `cd mx-quickconnect`
+3. Set up an environment using the following commands in your terminal:
+```shell
+cp .env.example .env
+vi .env
+```
+4. Insert your `api_key` and `client_id` from the [Client Dashboard](https://dashboard.mx.com). (Note: To enter, type `i` to enter insert mode, then move the cursor and type in your values. Finally, type `:wq ENTER` on your keyboard to save and exit the file.)
+5. Run the backend using one of the following sets of commands, depending on your language.
+
+
+```csharp AspNet
+cd mx-platform-aspnet-core
+dotnet add package MX.Platform.CSharp
+dotnet run
+```
+
+```javascript Node.js
+cd mx-platform-node
+npm install
+npm start
+```
+
+```python Python3
+cd python
+pip3 install -r requirements.txt
+./start.sh
+```
+
+```ruby Ruby
+cd ruby
+bundle install
+./start.sh
+```
+
+<Admonition type="success" title="Backend Setup Complete!">
+Your backend should now be up and running. Do not close the terminal.
+</Admonition>
+
+### Frontend Setup
+
+Once your backend is running, set up your frontend. All frontend implementations run Node.js. You must have npm version 7 or later installed.
+
+Your localhost runs automatically from your default browser. If your browser does not automatically appear,  enter localhost:3000 into your preferred browser.
+
+1. Open a new terminal. Make sure to keep the backend terminal open and running.
+2. Navigate back to the folder you cloned your project in.
+3. Run the following commands in your terminal:
+
+```shell
+cd frontend
+npm install
+npm start
+```
+
+<Admonition type="notice">
+You may experience a pop-up asking for permission to your browser if you have not already granted your terminal permission.
+</Admonition>
+
+### Using the Demo App
+
+After you set up the backend and frontend, your browser displays the app homepage. From here, you'll be guided through creating a user and a member. Creating a user and member connects the end user's financial account to the MX platform. After you've created your first user, you can return and launch the app with a previously created user, or you can create a new user.
+
+The app limits you to 5 users.
+
+The following steps explain how to use the widget with OAuth and example data.
+
+1. Select one of the **Launch** buttons to get started.
+    1. If it's your first time using the app, select **Launch with new user**.
+    2. If you've visited the app before, you can either select **Launch with new user** to create a new user or **Launch with previous user** to continue with a user that has already been created.
+    * When you select one of the **Launch** buttons, an embedded widget appears. The page also displays example information you'll need make a successful connection including a bank, username, and passwords.
+2. Select **Continue**. A list of financial institutions appears.
+3. Select **MX Bank (OAuth)**. The Sign In page appears.
+4. Select **Sign in**. An Authorization Required page appears. This is an example of how OAuth is implemented to provide an end user with additional security. 
+5. Select **Authorize**. After the user is verified, the account selection page appears.
+6. Select an account. The app shows two options (either savings or checking) for this demo. You can select either one. 
+7. Select **Continue**. This verifies the information provided. When successful, the page displays the `userGuid` and `memberGuid`.
+
+The `userGuid` and `memberGuid` are results of a successful verification. These two GUIDs can be used to complete additional requests to the MX Platform API. In the rest of this guide, these two GUIDs are used to automatically make requests to additional endpoints.
+
+### More Features
+
+After you've used the app to create users and members, use some of the other features provided by the demo app. Our app provides you with a few of our most common uses cases including:
+
+* Instant Account Verification (account and routing numbers)
+* Account Owner Identification (name, address, etc.)
+* Balance Checks
+* Listing Transactions
+
+For each request, select the **Run** button next to the request you'd like to make. The app displays the following information for each request:
+
+* The method and endpoint required to request the information. 
+* A brief description of the endpoint. 
+* The information returned in plain text format as a table. 
+* The request payload in JSON.
+
+<Admonition type="tip">
+Toggle between plain text and JSON by clicking the icons next to the description.
+</Admonition>
